@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
+import Navbar from './Navbar'
 import { apiUrl } from '../config';
-import User from './User';
 
-function UsersList (props) {
+
+function Homepage (props) {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -15,13 +15,13 @@ function UsersList (props) {
         fetchData();
     }, []);
 
-    const userComponents = users.map((user) => <User key={user.id} user={user} />)
+
     return (
         <>
+            <Navbar/>
             <h1>User List: </h1>
-            {userComponents}
         </>
         );
 }
 
-export default UsersList;
+export default Homepage;

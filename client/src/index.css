@@ -1,1 +1,27 @@
 /* TODO Add site wide styles */
+*{
+    margin: 0px;
+}
+body{
+    height: 100%;
+}
+/* Signup Page */
+.SignupPage{
+    background-color: rgb(21,82,240);
+    height: 100%;
+}
+
+.SignupPage__Title{
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    padding: 25px;
+}
+
+.SignupPage__Form{
+    background-color: white;
+    height: 400px;
+    width: 400px;
+    margin: 0 auto;
+    padding: 25px;
+}
