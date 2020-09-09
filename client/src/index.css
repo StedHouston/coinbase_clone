@@ -25,3 +25,65 @@ body{
     margin: 0 auto;
     padding: 25px;
 }
+
+.PricesPage__SearchBar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.PricesPage__Results{
+    padding: 24px;
+}
+
+.Coin{
+    display: flex;
+    height: 71px;
+    border: 1px solid lightgrey;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Coin__identifiers{
+    display: flex;
+    align-items: center;
+}
+
+.Coin__identifiers--number{
+    padding-left: 32px;
+    padding-right: 48px;
+}
+
+.Coin__identifiers--image{
+    height: 36px;
+    width: 36px;
+}
+
+.Coin__identifiers--name{
+    padding-left: 16px;
+    font-weight: 400;
+}
+
+.Coin__identifiers--symbol{
+    padding-left: 16px;
+    color: #11335399
+}
+
+.Coin__financials{
+    display: flex;
+}
+
+.Coin__financials--marketcap{
+    font-size: 18px;
+    margin-right: 48px;
+}
+
+.Coin__financials--change{
+    font-size: 18px;
+    margin-right: 30px;
+}
+
+.Coin__financials--price{
+    font-size: 18px;
+    margin-right: 40px;
+}

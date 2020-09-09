@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { signUp } from '../store/auth';
 import 'bulma/css/bulma.css'
 
 function Signup_page() {
@@ -10,9 +11,12 @@ function Signup_page() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
+    const dispatch = useDispatch();
 
-    async function handleSubmit(){
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        dispatch(signUp(firstName, lastName, email, password))
     }
 
 
@@ -33,19 +37,20 @@ function Signup_page() {
                     </div>
                     <div className="field">
                         <div className="control">
-                            <input className="input" type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>
+                            <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>
                         </div>
                     </div>
                     <div className="field">
                         <div className="control">
-                            <input className="input" type="text" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password"/>
+                            <input className="input" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password"/>
                         </div>
                     </div>
                     <div className="field">
                         <div className="control">
-                            <input className="input" type="text" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirm password"/>
+                            <input className="input" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirm password"/>
                         </div>
                     </div>
+                    <button className="button is-link is-focused" onClick={handleSubmit} >Signup</button>
                 </div>
             </div>
         </>

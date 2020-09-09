@@ -24,7 +24,7 @@ def signup():
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(14))
 
     #create user in database
-    user_to_add = User(email=email, first_name=first_name, last_name=last_name, encrypted_password=hashed_password)
+    user_to_add = User(email=email, first_name=first_name, last_name=last_name, password=hashed_password, account_balance=0)
     db.session.add(user_to_add)
     db.session.commit()
 
