@@ -17,6 +17,7 @@ function PricesPage() {
     },[])
 
     console.log(crypto)
+    let count = 0
     if(crypto){
         return (
             <>
@@ -32,8 +33,29 @@ function PricesPage() {
                     </div>
                 </div>
                 <div className="PricesPage__Results">
+                    <div className="PricesPage__Results--Header">
+                        <div className="PricesPage__Results--Header-Container">
+                            <div className="PricePage__Results--Header-numbersign">
+                                #
+                            </div>
+                            <div className="PricePage__Results--Header-Name">
+                                Name
+                            </div>
+                        </div>
+                        <div className="PricePage__Results--Header-Container2">
+                            <div className="PricePage__Results--Header-Price">
+                                Price
+                            </div>
+                            <div className="PricePage__Results--Header-Change">
+                                Change
+                            </div>
+                            <div className="PricePage__Results--Header-Marketcap">
+                                Market Cap
+                            </div>
+                        </div>
+                    </div>
                     {crypto.map(ele =>
-                        <Coin key={ele.id} image={ele.image} name={ele.name} symbol={ele.symbol} price={ele.current_price} change={ele.price_change_percentage_24h} marketcap={ele.market_cap}  />)}
+                        <Coin key={ele.id} number={count += 1} image={ele.image} name={ele.name} symbol={ele.symbol} price={ele.current_price} change={ele.price_change_percentage_24h} marketcap={ele.market_cap}  />)}
                 </div>
             </>
         );

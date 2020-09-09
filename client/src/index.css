@@ -32,6 +32,39 @@ body{
     align-items: center;
 }
 
+.PricesPage__Results--Header{
+    display: flex;
+    height: 71px;
+    border: 1px solid lightgrey;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.PricesPage__Results--Header-Container{
+    display: flex;
+}
+
+.PricePage__Results--Header-Container2{
+    display: flex;
+}
+
+.PricePage__Results--Header-numbersign{
+    padding-left: 32px;
+    padding-right: 48px;
+}
+
+.PricePage__Results--Header-Marketcap{
+    padding-right: 48px;
+}
+
+.PricePage__Results--Header-Change{
+    padding-right: 82px;
+}
+
+.PricePage__Results--Header-Price{
+    padding-right: 45px;
+}
+
 .PricesPage__Results{
     padding: 24px;
 }
