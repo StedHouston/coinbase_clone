@@ -1,11 +1,22 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 function Coin(props) {
     const { name, number, symbol, image, price, change, marketcap } = props;
+
+    let history = useHistory();
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        history.push(`/coinpage/${symbol}`)
+    }
+
+
+
     return (
         <>
-            <div className="Coin">
+            <div className="Coin" onClick={handleClick}>
                 <div className="Coin__identifiers">
                     <div className="Coin__identifiers--number">{number}</div>
                     <img className="Coin__identifiers--image" src={image}/>

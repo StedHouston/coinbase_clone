@@ -90,6 +90,7 @@ body{
     border: 1px solid lightgrey;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .Coin__identifiers{
@@ -134,4 +135,60 @@ body{
 .Coin__financials--price{
     font-size: 18px;
     margin-right: 40px;
+}
+
+.CoinPageContainer{
+    padding: 48px;
+}
+
+.CoinPageContainer__topheader{
+    display: flex;
+}
+
+.CoinPageContainer__mainheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0px;
+}
+
+.CoinPageContainer__mainheader--image{
+    height: 46px;
+    width: 46px;
+    margin-right: 24px;
+}
+
+.CoinPageContainer__mainheader--nameprice{
+    font-size: 32px;
+    font-weight: 500;
+    margin-right: 24px;
+}
+
+.CoinPageContainer__mainheader--symbol{
+    color: rgba(17,51,83,0.6);
+}
+
+.CoinPageContainer__mainheader--leftside{
+    display: flex;
+    align-items: center;
+}
+
+.CoinPageContainer__CoinDetails{
+    display: flex;
+    justify-content: space-between;
+    border: 1px lightgrey solid;
+    padding: 8px 24px;
+    width: 60%;
+}
+
+.CoinPageContainer__CoinDetails--marketcap{
+    margin: 14px 0px;
+}
+
+.CoinPageContainer__CoinDetails--volume{
+    margin: 14px 0px;
+}
+
+.CoinPageContainer__CoinDetails--circulatingsupply{
+    margin: 14px 0px;
 }
