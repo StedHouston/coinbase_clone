@@ -21,7 +21,7 @@ function Signup_page() {
 
 
     return (
-        <>
+        //<>
             <div className="SignupPage">
                 <div className="SignupPage__Title">Create your account</div>
                 <div className="SignupPage__Form">
@@ -53,7 +53,7 @@ function Signup_page() {
                     <button className="button is-link is-focused" onClick={handleSubmit} >Signup</button>
                 </div>
             </div>
-        </>
+        //</>
     );
 }
 export default Signup_page;

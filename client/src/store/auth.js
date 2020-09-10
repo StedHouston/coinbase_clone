@@ -51,7 +51,33 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
       const { access_token, id} = await response.json();
       localStorage.setItem('SESSION_TOKEN', access_token);
       localStorage.setItem('USER_ID', id);
-    //   dispatch(LoggedInAction());
+      dispatch(LoggedInAction());
+    }
+    catch (err) {
+    //   const errJSON = await err.json()
+    //   dispatch(handleAuthErrors(errJSON))
+    }
+  }
+
+  export const signIn = (email, password) => async dispatch => {
+    try {
+      const formData = new FormData();
+      formData.append("email", email)
+      formData.append("password", password)
+
+      const response = await fetch(`${baseUrl}/api/users/signin`, {
+        method: 'post',
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw response
+      }
+    //   //Place token in Local Storage, update Redux State
+      const { access_token, id} = await response.json();
+      localStorage.setItem('SESSION_TOKEN', access_token);
+      localStorage.setItem('USER_ID', id);
+      dispatch(LoggedInAction());
     }
     catch (err) {
     //   const errJSON = await err.json()
