@@ -13,7 +13,6 @@ transactions_routes = Blueprint('transactions', __name__)
 def crypto_buy():
     usd_cost_per_coin = float(request.json.get('usd_amount'))
     crypto_amount = float(request.json.get('crypto_amount'))
-    transaction_type = request.json.get('transaction_type')
     symbol = request.json.get('symbol')
 
     #get id from json web token
@@ -42,3 +41,48 @@ def crypto_buy():
     db.session.add(new_transaction)
     db.session.commit()
     return {"mgs": "success"}
+
+@transactions_routes.route('/sell', methods=['POST'])
+@jwt_required
+def crypto_sell():
+    usd_cost_per_coin = float(request.json.get('usd_amount'))
+    crypto_amount = float(request.json.get('crypto_amount'))
+    symbol = request.json.get('symbol')
+
+    #get id from json web token
+    current_user_id = get_jwt_identity()
+
+    #retrieve user given id if exists
+    temp_user = User.query.filter(User.id == current_user_id).first()
+    if temp_user is None:
+        return {'error': 'User with given id does not exist'}, 400
+
+    #retrieve crypto id given symbol
+    coin = Cryptocurrency.query.filter(Cryptocurrency.symbol == symbol).first()
+    if coin is None:
+        return {'error': 'this cryptocurrency is not supported'}, 400
+
+    #amount in usd that is being sold
+    sold_amount = usd_cost_per_coin * crypto_amount
+
+    #retrieve all transactions that contain the user's id and cryptocurrency id
+    transactions = Transaction.query.filter(Transaction.user_id == temp_user.id, Transaction.crypto_currency_id == coin.id).all()
+    results = [transaction.to_dict() for transaction in transactions]
+    total = 0
+
+    for item in results:
+        if item['transaction_type'] == 'buy':
+            total += item['crypto_amount']
+        if item['transaction_type'] == 'sell':
+            total -= item['crypto_amount']
+
+    if total >= crypto_amount:
+        today = date.today()
+        d1 = today.strftime("%m/%d/%Y")
+        new_transaction = Transaction(transaction_type='sell', crypto_amount=crypto_amount, usd_amount=sold_amount, price_per_coin=usd_cost_per_coin, date=d1, user_id=current_user_id, crypto_currency_id=coin.id)
+        temp_user.account_balance += sold_amount
+        db.session.add(new_transaction)
+        db.session.commit()
+        return {'msg': 'success'}
+    else:
+        return {'error': 'Not enough funds'}
