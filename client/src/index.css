@@ -192,3 +192,11 @@ body{
 .CoinPageContainer__CoinDetails--circulatingsupply{
     margin: 14px 0px;
 }
+
+.CoinPageContainer__CurrentPrice{
+    padding: 24px;
+}
+
+.CoinPageContainer__CurrentPrice--price{
+    font-size: 32px;
+}

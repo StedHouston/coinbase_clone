@@ -9,6 +9,7 @@ from app.models import db
 
 from app.models import db, User
 from app.api.user_routes import user_routes
+from app.api.transactions import transactions_routes
 
 from app.config import Config
 
@@ -16,6 +17,7 @@ app = Flask(__name__, static_url_path='')
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(transactions_routes, url_prefix='/api/transactions')
 db.init_app(app)
 jwt = JWTManager(app)
 Migrate(app, db)

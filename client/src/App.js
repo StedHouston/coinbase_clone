@@ -24,7 +24,7 @@ function App() {
             <Route path="/signin">
                 <Signin_page/>
             </Route>
-            <Route path="/coinpage">
+            <Route path="/coinpage/:name/:symbol">
                 <CoinPage/>
             </Route>
         </Switch>

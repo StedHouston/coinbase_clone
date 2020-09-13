@@ -9,7 +9,7 @@ function Coin(props) {
 
     const handleClick = (e) => {
         e.preventDefault();
-        history.push(`/coinpage/${symbol}`)
+        history.push(`/coinpage/${name}/${symbol}`)
     }
 
 

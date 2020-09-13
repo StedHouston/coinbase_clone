@@ -54,7 +54,6 @@ def signin():
     return {
         'access_token':access_token,
         'id': temp_user['id'],
-        'signed_petitions': temp_user['signed_petitions']
         }, 200
 
 
@@ -152,7 +151,7 @@ def validations_signin(email, password):
         errors.append('User was not found')
         return errors
     if user:
-        password_match = bcrypt.checkpw(password.encode('utf-8'), user.encrypted_password)
+        password_match = bcrypt.checkpw(password.encode('utf-8'), user.password)
         if not email:
             errors.append('Email is missing')
         if not password:

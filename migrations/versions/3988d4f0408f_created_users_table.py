@@ -1,7 +1,7 @@
 """created users table
 
 Revision ID: 3988d4f0408f
-Revises: 
+Revises:
 Create Date: 2020-09-09 13:06:48.674243
 
 """
@@ -24,7 +24,7 @@ def upgrade():
     sa.Column('last_name', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('password', sa.LargeBinary(), nullable=False),
-    sa.Column('account_balance', sa.String(length=255), nullable=False),
+    sa.Column('account_balance', sa.Float(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
