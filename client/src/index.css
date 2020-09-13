@@ -200,3 +200,76 @@ body{
 .CoinPageContainer__CurrentPrice--price{
     font-size: 32px;
 }
+
+.CoinPageContainer__graph{
+    display: flex;
+    justify-content: space-between;
+}
+
+.CoinPage__buy--layer1{
+    display: flex;
+}
+
+.CoinPage__transactions{
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 200px;
+    width: 300px;
+
+}
+
+.CoinPage__transactiontabs{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    width: 300px;
+}
+
+.CoinPage__transactions--usd{
+    display: flex;
+    justify-content: space-between;
+}
+
+.CoinPage__transactions--cost{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.CoinPage__transactions--orderbutton{
+    display: flex;
+    justify-content: center;
+}
+
+.small-input{
+    height: 10px;
+    width: 100px;
+    padding: 15px;
+}
+
+.buy_tab{
+    height: 50px;
+    width: 50px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.sell_tab{
+    height: 50px;
+    width: 50px;
+    padding-right: 5px;
+    padding-top: 10px;
+    margin-right: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.active{
+    color: blue;
+    /* border-left: 1px solid lightgrey;
+    border-top: 1px solid lightgrey; */
+    /* border-right: 1px solid lightgrey; */
+    border-bottom: 2px solid blue;
+}

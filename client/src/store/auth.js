@@ -61,13 +61,19 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
 
   export const signIn = (email, password) => async dispatch => {
     try {
-      const formData = new FormData();
-      formData.append("email", email)
-      formData.append("password", password)
+      // const formData = new FormData();
+      // formData.append("email", email)
+      // formData.append("password", password)
 
       const response = await fetch(`${baseUrl}/api/users/signin`, {
-        method: 'post',
-        body: formData
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'email': email,
+          'password': password
+        })
       });
 
       if (!response.ok) {
