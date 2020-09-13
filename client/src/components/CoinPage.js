@@ -15,6 +15,7 @@ function CoinPage() {
     const [toggle, setToggle] = useState(true)
     const [user_amount, setUser_amount] = useState('')
     const [cost, setCost] = useState(0)
+    const [availableFunds, setAvailableFunds] = useState('')
 
 let { name, symbol } = useParams();
 
@@ -57,7 +58,7 @@ let { name, symbol } = useParams();
             for(let i = 0; i < data_list.length; i++){
                 array.push({'name': data_list[i].time, 'price': data_list[i].open})
             }
-            console.log(array)
+
             setChart_data(array)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
@@ -122,7 +123,20 @@ let { name, symbol } = useParams();
         })
     }
 
-
+    const makeSell = async () => {
+        let response = await fetch(apiUrl + `/transactions/sell`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
+            },
+            body: JSON.stringify({
+                "usd_amount": usd,
+                "crypto_amount":  user_amount,
+                'symbol': symbol
+            })
+        })
+    }
 
 
     console.log(usd_24h_change)
@@ -177,19 +191,35 @@ let { name, symbol } = useParams();
                             <span className="buy_tab active" onClick={buyTab}>Buy</span>
                             <span className="sell_tab" onClick={sellTab}>Sell</span>
                         </div>
-                        <div className="CoinPage__transactions--usd">
-                            <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
-                            <div style={{padding: "10px"}}>
-                                <input className="small-input" value={user_amount} onChange={calculate_cost}></input>
+                        {toggle ? <div>
+                            <div className="CoinPage__transactions--usd">
+                                <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
+                                <div style={{padding: "10px"}}>
+                                    <input className="small-input" value={user_amount} onChange={calculate_cost}></input>
+                                </div>
                             </div>
-                        </div>
-                        <div className="CoinPage__transactions--cost">
-                            <span>Estimated Cost: </span>
-                            <span>{cost.toLocaleString()}</span>
-                        </div>
-                        <div className="CoinPage__transactions--orderbutton">
-                            <button className="button is-link" onClick={makePurchase}>Complete Order</button>
-                        </div>
+                            <div className="CoinPage__transactions--cost">
+                                <span>Estimated Cost: </span>
+                                <span>{cost.toLocaleString()}</span>
+                            </div>
+                            <div className="CoinPage__transactions--orderbutton">
+                                <button className="button is-link" onClick={makePurchase}>Complete Order</button>
+                            </div>
+                        </div> : <div>
+                            <div className="CoinPage__transactions--usd">
+                                <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
+                                <div style={{padding: "10px"}}>
+                                    <input className="small-input" value={user_amount} onChange={calculate_cost}></input>
+                                </div>
+                            </div>
+                            <div className="CoinPage__transactions--cost">
+                                <span>Estimated Credit: </span>
+                                <span>{cost.toLocaleString()}</span>
+                            </div>
+                            <div className="CoinPage__transactions--orderbutton">
+                                <button className="button is-link" onClick={makeSell}>Complete Order</button>
+                            </div>
+                        </div>}
                     </div>
                 </div>
                 <div className="CoinPageContainer__CoinDetails">

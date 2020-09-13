@@ -63,7 +63,7 @@ def crypto_sell():
         return {'error': 'this cryptocurrency is not supported'}, 400
 
     #amount in usd that is being sold
-    sold_amount = usd_cost_per_coin * crypto_amount
+    sold_amount = round(usd_cost_per_coin * crypto_amount, 2)
 
     #retrieve all transactions that contain the user's id and cryptocurrency id
     transactions = Transaction.query.filter(Transaction.user_id == temp_user.id, Transaction.crypto_currency_id == coin.id).all()
