@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import { LoggedOutAction } from '../store/auth';
 
 
 function Navbar() {
@@ -18,9 +19,11 @@ function Navbar() {
     }
 
     const signout = () => {
-
+        dispatch(LoggedOutAction())
+        localStorage.removeItem('SESSION_TOKEN')
+        localStorage.removeItem('USER_ID')
     }
-    console.log(loggedIn)
+
     return (
         <>
             <div className="Navbar">
