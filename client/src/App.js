@@ -6,11 +6,13 @@ import Signup_page from './components/Signup_page';
 import Signin_page from './components/Signin_page';
 import PricesPage from './components/PricesPage';
 import CoinPage from './components/CoinPage';
+import Navbar from './components/Navbar';
 
 function App() {
 
   return (
     <BrowserRouter>
+        {/* <Navbar/> */}
         <Switch>
             <Route path="/signup">
                 <Signup_page/>
@@ -26,6 +28,9 @@ function App() {
             </Route>
             <Route path="/coinpage/:name/:symbol">
                 <CoinPage/>
+            </Route>
+            <Route path="/">
+                <Homepage/>
             </Route>
         </Switch>
     </BrowserRouter>

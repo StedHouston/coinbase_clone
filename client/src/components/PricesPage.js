@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from '../components/Navbar';
 import Coin from './Coin';
 
 
@@ -21,6 +22,7 @@ function PricesPage() {
     if(crypto){
         return (
             <>
+                <Navbar/>
                 <div className="PricesPage__SearchBar">
                     <div>
                         <div>In the last 24 hours</div>

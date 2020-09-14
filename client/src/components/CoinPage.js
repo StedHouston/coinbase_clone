@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { apiUrl } from '../config'
+import { apiUrl } from '../config';
+import Navbar from '../components/Navbar';
 import 'bulma/css/bulma.css'
 
 function CoinPage() {
@@ -142,6 +143,7 @@ let { name, symbol } = useParams();
     console.log(usd_24h_change)
     return (
         <>
+            <Navbar/>
             <div className="CoinPageContainer">
                 <div className="CoinPageContainer__topheader">
                     <div className="CoinPageContainer__topheader--1">

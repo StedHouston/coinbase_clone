@@ -54,17 +54,8 @@ def signin():
     return {
         'access_token':access_token,
         'id': temp_user['id'],
+        'first_name': temp_user['first_name']
         }, 200
-
-
-# Use this route to get creator information for petitions
-@user_routes.route('/creator/<int:id>')
-def get_creator(id):
-    found_user = User.query.filter(User.id == id).first()
-    if found_user:
-        return found_user.to_dict()
-    else:
-        return {'error': "User not found"}, 400
 
 
 @user_routes.route('/<int:id>', methods=['GET','PATCH'])

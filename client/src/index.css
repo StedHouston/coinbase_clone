@@ -241,6 +241,82 @@ body{
     justify-content: center;
 }
 
+.Homepage__maincontent{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.Homepage__maincontent--header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Homepage__maincontent--header1{
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.Homepage__maincontent--header2{
+    font-size: 16px;
+}
+
+.Homepage__maincontent--image{
+    height: 600px;
+    width: 300px;
+}
+
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.Navbar__logo{
+    height: 65px;
+    width:  120px;
+    padding-left: 10px;
+}
+
+.Navbar__signoutbutton{
+    height: 50px;
+    width: 75px;
+    border-radius: 5px;
+    background-color: rgb(21,82,240);
+    color: white;
+    cursor: pointer;
+}
+
+.Navbar__signinbutton{
+    height: 50px;
+    width: 75px;
+    border-radius: 5px;
+    background-color: rgb(21,82,240);
+    color: white;
+    cursor: pointer;
+}
+
+.Navbar__signupbutton{
+    height: 50px;
+    width: 75px;
+    border-radius: 5px;
+    background-color: rgb(21,82,240);
+    margin: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+
+.Navbar__groupedbuttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
+}
 .small-input{
     height: 10px;
     width: 100px;
