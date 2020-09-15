@@ -318,6 +318,11 @@ body{
     width: 200px;
 }
 
+.Navbar__priceslink{
+    font-size: 28px;
+    font-weight: 700;
+}
+
 .Transaction__Container{
     display: flex;
     justify-content: space-between;
@@ -326,6 +331,11 @@ body{
     border-bottom: 1px solid lightgrey;
     height: 100px;
     width: 675px;
+}
+
+.Dashboard{
+    display: flex;
+    justify-content: space-between;
 }
 
 .small-input{

@@ -53,7 +53,7 @@ def crypto_buy():
 
     today = date.today()
     d1 = today.strftime("%m/%d/%Y")
-    new_transaction = Transaction(transaction_type='buy', crypto_amount=crypto_amount, usd_amount=cost, price_per_coin=usd_cost_per_coin, date=d1, user_id=current_user_id, crypto_currency_id=coin.id)
+    new_transaction = Transaction(transaction_type='Bought', crypto_amount=crypto_amount, usd_amount=cost, price_per_coin=usd_cost_per_coin, date=d1, user_id=current_user_id, crypto_currency_id=coin.id)
     db.session.add(new_transaction)
     db.session.commit()
     return {"mgs": "success"}
@@ -87,15 +87,15 @@ def crypto_sell():
     total = 0
 
     for item in results:
-        if item['transaction_type'] == 'buy':
+        if item['transaction_type'] == 'Bought':
             total += item['crypto_amount']
-        if item['transaction_type'] == 'sell':
+        if item['transaction_type'] == 'Sold':
             total -= item['crypto_amount']
 
     if total >= crypto_amount:
         today = date.today()
         d1 = today.strftime("%m/%d/%Y")
-        new_transaction = Transaction(transaction_type='sell', crypto_amount=crypto_amount, usd_amount=sold_amount, price_per_coin=usd_cost_per_coin, date=d1, user_id=current_user_id, crypto_currency_id=coin.id)
+        new_transaction = Transaction(transaction_type='Sold', crypto_amount=crypto_amount, usd_amount=sold_amount, price_per_coin=usd_cost_per_coin, date=d1, user_id=current_user_id, crypto_currency_id=coin.id)
         temp_user.account_balance += sold_amount
         db.session.add(new_transaction)
         db.session.commit()

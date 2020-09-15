@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { apiUrl, baseUrl } from '../config';
@@ -19,6 +20,8 @@ function CoinPage() {
     const [cost, setCost] = useState(0)
     const [availableFunds, setAvailableFunds] = useState('')
     const [history, setHistory] = useState([])
+
+    const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
 
 let { name, symbol } = useParams();
 
@@ -48,6 +51,7 @@ let { name, symbol } = useParams();
 
     useEffect(() => {
         async function fetchCoinData(){
+            console.log(loggedIn)
             let coin_name = name.toLowerCase()
             let results = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin_name}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
             let data = await results.json()
@@ -62,17 +66,19 @@ let { name, symbol } = useParams();
             for(let i = 0; i < data_list.length; i++){
                 array.push({'name': data_list[i].time, 'price': data_list[i].open})
             }
+            if (loggedIn){
+                let results3 = await fetch(`${apiUrl}/transactions/get_all`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
+                    },
+                });
+                let transaction_history = await results3.json()
+                setHistory(Object.values(transaction_history))
+                console.log(Object.values(transaction_history))
+            }
 
-            let results3 = await fetch(`${apiUrl}/transactions/get_all`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
-                },
-            });
-            let transaction_history = await results3.json()
-            setHistory(Object.values(transaction_history))
-            console.log(Object.values(transaction_history))
             setChart_data(array)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
@@ -163,7 +169,7 @@ let { name, symbol } = useParams();
                         <Link to={'/price'}>Price charts {'>'} </Link>
                     </div>
                     <div className="CoinPageContainer__topheader--2">
-                        <Link to={'/price'}>{name} price</Link>
+                        <Link to={`/coinpage/${name}/${symbol}`}> {name} price</Link>
                     </div>
                 </div>
                 <div className="CoinPageContainer__mainheader">
@@ -252,8 +258,9 @@ let { name, symbol } = useParams();
                     </div>
                 </div>
                 <div>History</div>
-                {history.map(ele =>
-                        <Transaction key={ele.id} name={name} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
+                {history ? <div>{history.map(ele =>
+                        <Transaction key={ele.id} name={name} symbol={symbol} transaction_type={ele.transaction_type} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
+                        </div> : <div></div>}
 
             </div>
         </>
