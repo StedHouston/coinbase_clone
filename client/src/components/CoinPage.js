@@ -259,7 +259,7 @@ let { name, symbol } = useParams();
                 </div>
                 <div>History</div>
                 {history ? <div>{history.map(ele =>
-                        <Transaction key={ele.id} name={name} transaction_type={ele.transaction_type} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
+                        <Transaction key={ele.id} name={name} symbol={symbol} transaction_type={ele.transaction_type} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
                         </div> : <div></div>}
 
             </div>

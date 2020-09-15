@@ -3,7 +3,7 @@ import React from 'react';
 
 
 function Transaction(props) {
-    let {name, transaction_type, date, usd_amount, crypto_amount, price_per_coin } = props;
+    let {name, symbol, transaction_type, date, usd_amount, crypto_amount, price_per_coin } = props;
     let newDate = []
     let date_array = date.split(' ')
     newDate.push(date_array[2])
@@ -21,7 +21,7 @@ function Transaction(props) {
                 </div>
                 <div>
                     <div>${usd_amount.toLocaleString()}</div>
-                    <div>{crypto_amount} BTC at ${price_per_coin.toLocaleString()}</div>
+                    <div>{crypto_amount} {symbol} at ${price_per_coin.toLocaleString()}</div>
                 </div>
             </div>
         </>

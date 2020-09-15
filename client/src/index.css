@@ -333,6 +333,11 @@ body{
     width: 675px;
 }
 
+.Dashboard{
+    display: flex;
+    justify-content: space-between;
+}
+
 .small-input{
     height: 10px;
     width: 100px;
