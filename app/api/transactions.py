@@ -8,6 +8,22 @@ import re
 transactions_routes = Blueprint('transactions', __name__)
 
 
+@transactions_routes.route('/get_all', methods=['GET'])
+@jwt_required
+def get_all():
+
+    #get id from json web token
+    current_user_id = get_jwt_identity()
+
+    #get all transactions for given user
+    transactions = Transaction.query.filter(Transaction.user_id == current_user_id).all()
+    results = [transaction.to_dict() for transaction in transactions]
+    return {result['id']: result for result in results}
+
+
+
+
+
 @transactions_routes.route('/buy', methods=['POST'])
 @jwt_required
 def crypto_buy():

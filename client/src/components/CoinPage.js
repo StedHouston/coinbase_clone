@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { apiUrl } from '../config';
+import { apiUrl, baseUrl } from '../config';
 import Navbar from '../components/Navbar';
+import Transaction from '../components/Transaction';
 import 'bulma/css/bulma.css'
 
 function CoinPage() {
@@ -17,6 +18,7 @@ function CoinPage() {
     const [user_amount, setUser_amount] = useState('')
     const [cost, setCost] = useState(0)
     const [availableFunds, setAvailableFunds] = useState('')
+    const [history, setHistory] = useState([])
 
 let { name, symbol } = useParams();
 
@@ -51,6 +53,7 @@ let { name, symbol } = useParams();
             let data = await results.json()
             let coin_data = data[coin_name]
             console.log(coin_data)
+
             let results2 = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${symbol}&tsym=USD&limit=20&api_key=533034e0c596e9e29966a48d59566595dc3053fa219ea940a8e244a951936f7a`)
             let past_data = await results2.json()
             console.log(past_data)
@@ -60,6 +63,16 @@ let { name, symbol } = useParams();
                 array.push({'name': data_list[i].time, 'price': data_list[i].open})
             }
 
+            let results3 = await fetch(`${apiUrl}/transactions/get_all`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
+                },
+            });
+            let transaction_history = await results3.json()
+            setHistory(Object.values(transaction_history))
+            console.log(Object.values(transaction_history))
             setChart_data(array)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
@@ -238,6 +251,10 @@ let { name, symbol } = useParams();
                         18.5M {symbol.toUpperCase()}
                     </div>
                 </div>
+                <div>History</div>
+                {history.map(ele =>
+                        <Transaction key={ele.id} name={name} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
+
             </div>
         </>
     );

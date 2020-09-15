@@ -317,6 +317,17 @@ body{
     align-items: center;
     width: 200px;
 }
+
+.Transaction__Container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    height: 100px;
+    width: 675px;
+}
+
 .small-input{
     height: 10px;
     width: 100px;
