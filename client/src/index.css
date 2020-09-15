@@ -318,6 +318,11 @@ body{
     width: 200px;
 }
 
+.Navbar__priceslink{
+    font-size: 28px;
+    font-weight: 700;
+}
+
 .Transaction__Container{
     display: flex;
     justify-content: space-between;
