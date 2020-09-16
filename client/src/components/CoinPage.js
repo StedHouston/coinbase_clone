@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { apiUrl, baseUrl } from '../config';
 import Navbar from '../components/Navbar';
+import LineChart from '../components/LineChart';
 import Transaction from '../components/Transaction';
 import 'bulma/css/bulma.css'
+
 
 function CoinPage() {
 
@@ -20,34 +21,14 @@ function CoinPage() {
     const [cost, setCost] = useState(0)
     const [availableFunds, setAvailableFunds] = useState('')
     const [history, setHistory] = useState([])
+    const [prices, setPrices] = useState()
+    const [times, setTimes] = useState()
 
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
 
-let { name, symbol } = useParams();
+    let { name, symbol } = useParams();
 
-    const data = [
-        {
-          name: 'Page A', uv: 10100,
-        },
-        {
-          name: 'Page B', uv: 10001,
-        },
-        {
-          name: 'Page C', uv: 12000,
-        },
-        {
-          name: 'Page D', uv: 10900,
-        },
-        {
-          name: 'Page E', uv: 10000,
-        },
-        {
-          name: 'Page F', uv: 10354,
-        },
-        {
-          name: 'Page G', uv: 11000,
-        },
-      ];
+
 
     useEffect(() => {
         async function fetchCoinData(){
@@ -62,10 +43,17 @@ let { name, symbol } = useParams();
             let past_data = await results2.json()
             console.log(past_data)
             let data_list = past_data.Data.Data
-            let array = []
+            console.log(data_list)
+            let prices = []
+            let times = []
             for(let i = 0; i < data_list.length; i++){
-                array.push({'name': data_list[i].time, 'price': data_list[i].open})
+                prices.push(data_list[i].open)
+                times.push(data_list[i].time)
+                // array.push({'name': data_list[i].time, 'price': data_list[i].open})
             }
+            console.log(prices)
+            console.log(times)
+
             if (loggedIn){
                 let results3 = await fetch(`${apiUrl}/transactions/get_all`, {
                     method: 'GET',
@@ -79,11 +67,13 @@ let { name, symbol } = useParams();
                 console.log(Object.values(transaction_history))
             }
 
-            setChart_data(array)
+            // setChart_data(array)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
             setUsd_24h_change(coin_data.usd_24h_change)
             setUsd(coin_data.usd)
+            setPrices(prices)
+            setTimes(times)
         }
         fetchCoinData()
     },[])
@@ -159,7 +149,7 @@ let { name, symbol } = useParams();
     }
 
 
-    console.log(usd_24h_change)
+    console.log(chart_data)
     return (
         <>
             <Navbar/>
@@ -190,23 +180,8 @@ let { name, symbol } = useParams();
                         <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span>{usd_24h_change.toFixed(2)}%</span>
                     </div> : <div>loading...</div>}
                 <div className="CoinPageContainer__graph">
-                    {/* { usd_24h_change ? <div className="CoinPageContainer__CurrentPrice">
-                        <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span>{usd_24h_change.toFixed(2)}%</span>
-                    </div> : <div>loading...</div>} */}
-                    {chart_data ? <LineChart width={768} height={200} data={chart_data} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="price" stroke="#1552f0" activeDot={{ r: 8 }} />
-                    </LineChart> : <div>...loading</div>}
-                    {/* <LineChart width={768} height={200} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="uv" stroke="#1552f0" activeDot={{ r: 8 }} />
-                    </LineChart> */}
+                    {prices && times ? <LineChart className="CoinPageContainer__graph--chart" prices={prices} times={times}/> :
+                    <div></div>}
                     <div className="CoinPage__transactions">
                         <div className="CoinPage__transactiontabs">
                             <span className="buy_tab active" onClick={buyTab}>Buy</span>

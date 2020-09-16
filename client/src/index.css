@@ -206,6 +206,10 @@ body{
     justify-content: space-between;
 }
 
+/* .CoinPageContainer__graph--chart{
+    width: 70%;
+} */
+
 .CoinPage__buy--layer1{
     display: flex;
 }
@@ -330,7 +334,11 @@ body{
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
     height: 100px;
-    width: 675px;
+    width: 55%;
+}
+
+.LineChart{
+    width: 70%;
 }
 
 .Dashboard{
