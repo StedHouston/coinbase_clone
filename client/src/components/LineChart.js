@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 
@@ -35,10 +34,15 @@ const LineChart = (props) => {
           format: '{value:%H %M}'
       },
       categories: newTimes,
+      // minPadding: 0,
+      // maxPadding: 0
     },
     series: [
       { data: prices }
     ],
+    chart: {
+      width: 1000
+    },
     plotOptions: {
       series: {
         point: {
@@ -52,13 +56,6 @@ const LineChart = (props) => {
     }
   });
 
-  const updateSeries = () => {
-    setChartOptions({
-      series: [
-          { data: [Math.random() * 5, 2, 1]}
-        ]
-    });
-  }
 
   return (
       <div className="LineChart">
