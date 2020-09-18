@@ -27,7 +27,6 @@ function CoinPage() {
 
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
     const coin_info = useSelector(state => state.SendCoinReducer)
-    console.log(coin_info)
 
     let { name, symbol } = useParams();
 
@@ -36,28 +35,23 @@ function CoinPage() {
     useEffect(() => {
         async function fetchCoinData(){
 
-            let coin_name = name.toLowerCase()
-            console.log(coin_info)
-            console.log(coin_name)
+
             let results = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin_info.id}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
             let data = await results.json()
             let coin_data = data[coin_info.id]
-            console.log(coin_data)
+
 
             let results2 = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${coin_info.symbol}&tsym=USD&limit=20&api_key=533034e0c596e9e29966a48d59566595dc3053fa219ea940a8e244a951936f7a`)
             let past_data = await results2.json()
-            console.log(past_data)
+
             let data_list = past_data.Data.Data
-            console.log(data_list)
             let prices = []
             let times = []
             for(let i = 0; i < data_list.length; i++){
                 prices.push(data_list[i].open)
                 times.push(data_list[i].time)
-                // array.push({'name': data_list[i].time, 'price': data_list[i].open})
+
             }
-            console.log(prices)
-            console.log(times)
 
             if (loggedIn){
                 let results3 = await fetch(`${apiUrl}/transactions/get_all`, {
@@ -69,7 +63,6 @@ function CoinPage() {
                 });
                 let transaction_history = await results3.json()
                 setHistory(Object.values(transaction_history))
-                console.log(Object.values(transaction_history))
             }
 
             let result4 = await fetch(`${apiUrl}/coins/${symbol}`)
@@ -156,8 +149,6 @@ function CoinPage() {
         })
     }
 
-
-    console.log(chart_data)
     return (
         <>
             <Navbar/>
