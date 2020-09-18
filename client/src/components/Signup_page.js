@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { signUp } from '../store/auth';
 import Navbar from '../components/Navbar';
 import 'bulma/css/bulma.css'
@@ -13,11 +14,12 @@ function Signup_page() {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const dispatch = useDispatch();
-
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(signUp(firstName, lastName, email, password))
+        history.push('/price')
     }
 
 

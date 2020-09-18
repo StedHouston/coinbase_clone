@@ -21,7 +21,7 @@ function Transaction(props) {
                 </div>
                 <div>
                     <div>${usd_amount.toLocaleString()}</div>
-                    <div>{crypto_amount} {symbol} at ${price_per_coin.toLocaleString()}</div>
+                    <div>{crypto_amount} {symbol.toUpperCase()} at ${price_per_coin.toLocaleString()}</div>
                 </div>
             </div>
         </>

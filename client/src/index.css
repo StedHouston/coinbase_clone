@@ -160,7 +160,7 @@ body{
 
 .CoinPageContainer__topheader{
     display: flex;
-    width: 80%;
+    width: 90%;
     padding: auto;
     margin: auto;
 }
@@ -169,7 +169,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 90%;
     padding: 32px auto;
     margin: 32px auto;
 }
@@ -207,7 +207,7 @@ body{
     padding: 8px 24px;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 90%;
 }
 
 .CoinPageContainer__CoinDetails--marketcap{
@@ -224,7 +224,7 @@ body{
 
 .CoinPageContainer__CurrentPrice{
     padding: 24px;
-    width: 80%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     border-top: 1px solid lightgrey;
@@ -242,7 +242,7 @@ body{
 .CoinPageContainer__graph{
     /* justify-content: space-between; */
     display: flex;
-    width: 80%;
+    width: 90%;
     border-left: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
     margin-left: auto;
@@ -290,7 +290,7 @@ body{
 }
 
 .CoinPageContainer__History__Title{
-    width: 80%;
+    width: 90%;
     margin: auto;
     padding: auto;
     margin-top: 48px;
@@ -398,7 +398,7 @@ body{
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
     height: 100px;
-    width: 80%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
