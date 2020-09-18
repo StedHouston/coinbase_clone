@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-
+import PortfolioContainer from '../components/PortfolioContainer';
+import AddMoney from '../components/AddMoney';
 
 function Dashboard() {
 
@@ -13,11 +14,12 @@ function Dashboard() {
         <>
             <Navbar/>
             <div className="Dashboard">
-                <div className="Dashboad__Portfolio">
+                <div className="Dashboard__Main">
                     <div>Portfolio</div>
-                    <div></div>
+                    <AddMoney/>
+                    <PortfolioContainer/>
                 </div>
-                <div className="Dashboad__History">
+                <div className="Dashboard__History">
                     Transaction History
                 </div>
             </div>

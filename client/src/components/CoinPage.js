@@ -23,8 +23,11 @@ function CoinPage() {
     const [history, setHistory] = useState([])
     const [prices, setPrices] = useState()
     const [times, setTimes] = useState()
+    const [coinUrl, setCoinUrl] = useState('')
 
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
+    const coin_info = useSelector(state => state.SendCoinReducer)
+    console.log(coin_info)
 
     let { name, symbol } = useParams();
 
@@ -32,14 +35,16 @@ function CoinPage() {
 
     useEffect(() => {
         async function fetchCoinData(){
-            console.log(loggedIn)
+
             let coin_name = name.toLowerCase()
-            let results = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin_name}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
+            console.log(coin_info)
+            console.log(coin_name)
+            let results = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin_info.id}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
             let data = await results.json()
-            let coin_data = data[coin_name]
+            let coin_data = data[coin_info.id]
             console.log(coin_data)
 
-            let results2 = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${symbol}&tsym=USD&limit=20&api_key=533034e0c596e9e29966a48d59566595dc3053fa219ea940a8e244a951936f7a`)
+            let results2 = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${coin_info.symbol}&tsym=USD&limit=20&api_key=533034e0c596e9e29966a48d59566595dc3053fa219ea940a8e244a951936f7a`)
             let past_data = await results2.json()
             console.log(past_data)
             let data_list = past_data.Data.Data
@@ -67,6 +72,9 @@ function CoinPage() {
                 console.log(Object.values(transaction_history))
             }
 
+            let result4 = await fetch(`${apiUrl}/coins/${symbol}`)
+            let coin = await result4.json()
+            setCoinUrl(coin.image_url)
             // setChart_data(array)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
@@ -165,7 +173,7 @@ function CoinPage() {
                     </div>
                     <div className="CoinPageContainer__mainheader">
                         <div className="CoinPageContainer__mainheader--leftside">
-                            <img className="CoinPageContainer__mainheader--image" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt=""/>
+                            <img className="CoinPageContainer__mainheader--image" src={coin_info.image} alt=""/>
                             <div className="CoinPageContainer__mainheader--nameprice">
                                 {name} price
                             </div>

@@ -135,6 +135,7 @@ body{
 .Coin__financials--price{
     font-size: 18px;
     margin-right: 40px;
+    font-weight: bold;
 }
 
 .CoinPageContainer1{
@@ -356,6 +357,46 @@ body{
     border-bottom: 1px solid lightgrey;
     height: 100px;
     width: 55%;
+}
+
+.Portfolio{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+    /* width: 25%; */
+    border: 1px solid black;
+}
+
+.Portfolio__amount{
+
+}
+
+.Portfolio__graph{
+    color: green;
+}
+
+.Portfolio__price{
+    font-weight: bold
+}
+
+.AddMoney{
+    width: 70%;
+}
+
+.AddMoney__amounts{
+    display: flex;
+    justify-content: space-around;
+}
+
+.Dashboard{
+    display: flex;
+    padding: 84px;
+}
+
+.Dashboard__Main{
+    width: 500px;
+    border: 1px solid green;
 }
 
 .LineChart{
