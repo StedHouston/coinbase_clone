@@ -135,10 +135,17 @@ body{
 .Coin__financials--price{
     font-size: 18px;
     margin-right: 40px;
+    font-weight: bold;
+}
+
+.CoinPageContainer1{
+    display: flex;
 }
 
 .CoinPageContainer{
     padding: 48px;
+    border: 1px solid black;
+    width: 100%;
 }
 
 .CoinPageContainer__topheader{
@@ -149,6 +156,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 70%;
     padding: 32px 0px;
 }
 
@@ -176,9 +184,14 @@ body{
 .CoinPageContainer__CoinDetails{
     display: flex;
     justify-content: space-between;
-    border: 1px lightgrey solid;
+    border-top: 1px lightgrey solid;
+    border-left: 1px lightgrey solid;
+    border-right: 1px lightgrey solid;
+    border-bottom: 1px lightgrey solid;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     padding: 8px 24px;
-    width: 60%;
+    width: 80%;
 }
 
 .CoinPageContainer__CoinDetails--marketcap{
@@ -195,20 +208,29 @@ body{
 
 .CoinPageContainer__CurrentPrice{
     padding: 24px;
+    width: 80%;
+    border-top: 1px solid lightgrey;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
 
 .CoinPageContainer__CurrentPrice--price{
     font-size: 32px;
+    margin-right: 15px;
 }
 
 .CoinPageContainer__graph{
-    display: flex;
     justify-content: space-between;
+    width: 80%;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
 }
 
-/* .CoinPageContainer__graph--chart{
-    width: 70%;
-} */
+.CoinPageContainer__graph--chart{
+    width: 100%;
+}
 
 .CoinPage__buy--layer1{
     display: flex;
@@ -335,6 +357,46 @@ body{
     border-bottom: 1px solid lightgrey;
     height: 100px;
     width: 55%;
+}
+
+.Portfolio{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+    /* width: 25%; */
+    border: 1px solid black;
+}
+
+.Portfolio__amount{
+
+}
+
+.Portfolio__graph{
+    color: green;
+}
+
+.Portfolio__price{
+    font-weight: bold
+}
+
+.AddMoney{
+    width: 70%;
+}
+
+.AddMoney__amounts{
+    display: flex;
+    justify-content: space-around;
+}
+
+.Dashboard{
+    display: flex;
+    padding: 84px;
+}
+
+.Dashboard__Main{
+    width: 500px;
+    border: 1px solid green;
 }
 
 .LineChart{

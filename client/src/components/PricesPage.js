@@ -57,7 +57,7 @@ function PricesPage() {
                         </div>
                     </div>
                     {crypto.map(ele =>
-                        <Coin key={ele.id} number={count += 1} image={ele.image} name={ele.name} symbol={ele.symbol} price={ele.current_price} change={ele.price_change_percentage_24h} marketcap={ele.market_cap}  />)}
+                        <Coin key={ele.id} id={ele.id} number={count += 1} image={ele.image} name={ele.name} symbol={ele.symbol} price={ele.current_price} change={ele.price_change_percentage_24h} marketcap={ele.market_cap}  />)}
                 </div>
             </>
         );

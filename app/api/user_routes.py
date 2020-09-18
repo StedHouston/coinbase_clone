@@ -93,21 +93,7 @@ def user_page(id):
         else:
             return {'error': 'User was not found'}, 400
 
-@user_routes.route('/delete_account', methods=['DELETE'])
-@jwt_required
-def delete_account():
-    #get id from json web token
-    current_user_id = get_jwt_identity()
 
-    #retrieve user from data to be deleted if exists
-    temp_user = User.query.filter(User.id == current_user_id).first()
-    if temp_user is None:
-        return {'error': 'User with given id does not exist'}, 400
-
-    #delete user from database
-    db.session.delete(temp_user)
-    db.session.commit()
-    return {'status': 200}
 
 #Validations below
 def validations_signup(email, first_name, last_name, password):

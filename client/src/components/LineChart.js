@@ -1,25 +1,48 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 
 
 const LineChart = (props) => {
-    let { prices, times } = props;
-    console.log(times)
-    let apple = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
+  let { prices, times } = props;
+  console.log(times)
+
+  let newTimes = []
+  for(let i = 0; i < times.length; i++){
+    const milliseconds = times[i] * 1000
+    const dateObject = new Date(milliseconds)
+    const humanDateFormat = dateObject.toLocaleString('en-US', {timeZoneName: 'short'});
+    let list = humanDateFormat.split(' ')
+    if(list[1].length === 7){
+      const updatedDate = list[1].slice(0, 4) + ` ${list[2]}`
+      newTimes.push(updatedDate)
+    }else{
+      const updatedDate = list[1].slice(0, 5) + ` ${list[2]}`
+      newTimes.push(updatedDate)
+    }
+
+
+    // newTimes.push(humanDateFormat)
+  }
+
+
   const [hoverData, setHoverData] = useState(null);
   const [chartOptions, setChartOptions] = useState({
     xAxis: {
       type: 'datetime',
       labels: {
-          format: '{value:%b %e}'
+          format: '{value:%H %M}'
       },
-      categories: times,
+      categories: newTimes,
+      // minPadding: 0,
+      // maxPadding: 0
     },
     series: [
       { data: prices }
     ],
+    chart: {
+      width: 1000
+    },
     plotOptions: {
       series: {
         point: {
@@ -33,13 +56,6 @@ const LineChart = (props) => {
     }
   });
 
-  const updateSeries = () => {
-    setChartOptions({
-      series: [
-          { data: [Math.random() * 5, 2, 1]}
-        ]
-    });
-  }
 
   return (
       <div className="LineChart">
@@ -47,8 +63,6 @@ const LineChart = (props) => {
           highcharts={Highcharts}
           options={chartOptions}
         />
-        <h3>Hovering over {hoverData}</h3>
-        <button onClick={updateSeries}>Update Series</button>
       </div>
     )
 }
