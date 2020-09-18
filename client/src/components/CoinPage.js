@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { apiUrl, baseUrl } from '../config';
@@ -29,7 +29,7 @@ function CoinPage() {
     const coin_info = useSelector(state => state.SendCoinReducer)
 
     let { name, symbol } = useParams();
-
+    let historyHook = useHistory()
 
 
     useEffect(() => {
@@ -132,6 +132,7 @@ function CoinPage() {
 
             })
         })
+        historyHook.push(`/coinpage/${name}/${symbol}`)
     }
 
     const makeSell = async () => {
@@ -182,28 +183,7 @@ function CoinPage() {
                     <div className="CoinPageContainer__graph">
                         {prices && times ? <LineChart prices={prices} times={times}/> :
                         <div></div>}
-                    </div>
-                    <div className="CoinPageContainer__CoinDetails">
-                        <div className="CoinPageContainer__CoinDetails--marketcap">
-                            <div>Market cap</div>
-                            ${usd_market_cap.toLocaleString()}
-                        </div>
-                        <div className="CoinPageContainer__CoinDetails--volume">
-                            <div>Volume (24 hours)</div>
-                            ${usd_24h_vol.toLocaleString()}
-                        </div>
-                        <div className="CoinPageContainer__CoinDetails--circulatingsupply">
-                            <div>circulating supply</div>
-                            18.5M {symbol.toUpperCase()}
-                        </div>
-                    </div>
-                    <div>History</div>
-                    {history ? <div>{history.map(ele =>
-                            <Transaction key={ele.id} name={name} symbol={symbol} transaction_type={ele.transaction_type} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
-                            </div> : <div></div>}
-
-                </div>
-                {/* <div className="CoinPage__transactions">
+                        <div className="CoinPage__transactions">
                             <div className="CoinPage__transactiontabs">
                                 <span className="buy_tab active" onClick={buyTab}>Buy</span>
                                 <span className="sell_tab" onClick={sellTab}>Sell</span>
@@ -236,8 +216,29 @@ function CoinPage() {
                                 <div className="CoinPage__transactions--orderbutton">
                                     <button className="button is-link" onClick={makeSell}>Complete Order</button>
                                 </div>
-                            </div>}
-                </div> */}
+                        </div>}
+                </div>
+                    </div>
+                    <div className="CoinPageContainer__CoinDetails">
+                        <div className="CoinPageContainer__CoinDetails--marketcap">
+                            <div>Market cap</div>
+                            ${usd_market_cap.toLocaleString()}
+                        </div>
+                        <div className="CoinPageContainer__CoinDetails--volume">
+                            <div>Volume (24 hours)</div>
+                            ${usd_24h_vol.toLocaleString()}
+                        </div>
+                        <div className="CoinPageContainer__CoinDetails--circulatingsupply">
+                            <div>circulating supply</div>
+                            18.5M {symbol.toUpperCase()}
+                        </div>
+                    </div>
+                    <div className="CoinPageContainer__History__Title">Transaction History</div>
+                    {history ? <div className="CoinPageContainer__History__Data">{history.map(ele =>
+                            <Transaction key={ele.id} name={name} symbol={symbol} transaction_type={ele.transaction_type} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
+                            </div> : <div>No purchases have been made</div>}
+
+                </div>
             </div>
         </>
     );

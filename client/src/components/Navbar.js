@@ -33,7 +33,7 @@ function Navbar() {
                 <Link to={'/price'}>
                     <div className="Navbar__priceslink">Prices</div>
                 </Link>
-                {loggedIn ? <div>Welcome, {first_name}</div> : <div></div>}
+                {loggedIn ? <div className="Navbar__welcome">Welcome, {first_name}</div> : <div></div>}
                 {loggedIn ? <button className="Navbar__signoutbutton" onClick={signout}>Signout</button> :
                 <p className="Navbar__groupedbuttons">
                     <button className="Navbar__signinbutton" onClick={signin}>Signin</button>

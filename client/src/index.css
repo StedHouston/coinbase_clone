@@ -149,7 +149,7 @@ body{
 }
 
 .CoinPageContainer1{
-    display: flex;
+    /* display: flex; */
 }
 
 .CoinPageContainer{
@@ -160,14 +160,18 @@ body{
 
 .CoinPageContainer__topheader{
     display: flex;
+    width: 80%;
+    padding: auto;
+    margin: auto;
 }
 
 .CoinPageContainer__mainheader{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70%;
-    padding: 32px 0px;
+    width: 80%;
+    padding: 32px auto;
+    margin: 32px auto;
 }
 
 .CoinPageContainer__mainheader--image{
@@ -201,6 +205,8 @@ body{
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding: 8px 24px;
+    margin-left: auto;
+    margin-right: auto;
     width: 80%;
 }
 
@@ -219,6 +225,8 @@ body{
 .CoinPageContainer__CurrentPrice{
     padding: 24px;
     width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     border-top: 1px solid lightgrey;
     border-left: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
@@ -233,9 +241,13 @@ body{
 
 .CoinPageContainer__graph{
     /* justify-content: space-between; */
+    display: flex;
     width: 80%;
     border-left: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
+    margin-left: auto;
+    margin-right: auto;
+    /* padding-left: 300px; */
 }
 
 .CoinPageContainer__graph--chart{
@@ -250,7 +262,7 @@ body{
     border: 2px solid black;
     border-radius: 5px;
     height: 200px;
-    width: 300px;
+    /* width: 300px; */
 
 }
 
@@ -275,6 +287,20 @@ body{
 .CoinPage__transactions--orderbutton{
     display: flex;
     justify-content: center;
+}
+
+.CoinPageContainer__History__Title{
+    width: 80%;
+    margin: auto;
+    padding: auto;
+    margin-top: 48px;
+    font-size: 20px;
+    font-weight: 700;
+    /* padding-left: 50px; */
+}
+
+.CoinPageContainer__History__Data{
+
 }
 
 .Homepage__maincontent{
@@ -354,6 +380,12 @@ body{
     width: 200px;
 }
 
+.Navbar__welcome{
+    color: rgb(21,82,240);
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .Navbar__priceslink{
     font-size: 28px;
     font-weight: 700;
@@ -366,7 +398,9 @@ body{
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
     height: 100px;
-    width: 55%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .Portfolio{

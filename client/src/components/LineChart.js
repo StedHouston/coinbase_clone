@@ -40,23 +40,28 @@ const LineChart = (props) => {
       // minPadding: 0,
       // maxPadding: 0
     },
+    yAxis: {
+      title: {
+        enabled: false,
+      },
+    },
     series: [
       { data: prices }
     ],
     chart: {
-      width: 1000
+      width: 725
     },
-    plotOptions: {
-      series: {
-        point: {
-          events: {
-            mouseOver(e){
-              setHoverData(e.target.category)
-            }
-          }
-        }
-      }
-    }
+    // plotOptions: {
+    //   series: {
+    //     point: {
+    //       events: {
+    //         mouseOver(e){
+    //           setHoverData(e.target.category)
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   });
 
 
