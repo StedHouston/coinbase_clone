@@ -28,6 +28,9 @@ const LineChart = (props) => {
 
   const [hoverData, setHoverData] = useState(null);
   const [chartOptions, setChartOptions] = useState({
+    title: {
+      text: ''
+    },
     xAxis: {
       type: 'datetime',
       labels: {

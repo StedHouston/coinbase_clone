@@ -61,6 +61,8 @@ body{
 
 .PricePage__Results--Header-Container2{
     display: flex;
+    justify-content: space-between;
+    width: 40%;
 }
 
 .PricePage__Results--Header-numbersign{
@@ -69,15 +71,19 @@ body{
 }
 
 .PricePage__Results--Header-Marketcap{
-    padding-right: 48px;
+    margin-right: 17px;
+    width: 39%;
 }
 
 .PricePage__Results--Header-Change{
-    padding-right: 82px;
+    margin-left: 26px;
+    width: 20%;
+
 }
 
 .PricePage__Results--Header-Price{
-    padding-right: 45px;
+    /* padding-right: 45px; */
+    width: 26%;
 }
 
 .PricesPage__Results{
@@ -120,22 +126,26 @@ body{
 
 .Coin__financials{
     display: flex;
+    width: 40%;
 }
 
 .Coin__financials--marketcap{
     font-size: 18px;
     margin-right: 48px;
+    width: 35%;
 }
 
 .Coin__financials--change{
     font-size: 18px;
     margin-right: 30px;
+    width: 18%;
 }
 
 .Coin__financials--price{
     font-size: 18px;
     margin-right: 40px;
     font-weight: bold;
+    width: 28%;
 }
 
 .CoinPageContainer1{
@@ -222,7 +232,7 @@ body{
 }
 
 .CoinPageContainer__graph{
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 80%;
     border-left: 1px solid lightgrey;
     border-right: 1px solid lightgrey;

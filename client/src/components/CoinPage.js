@@ -54,7 +54,7 @@ function CoinPage() {
             }
 
             if (loggedIn){
-                let results3 = await fetch(`${apiUrl}/transactions/get_all`, {
+                let results3 = await fetch(`${apiUrl}/transactions/get_all/${symbol}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function CoinPage() {
                     },
                 });
                 let transaction_history = await results3.json()
-                setHistory(Object.values(transaction_history))
+                setHistory(Object.values(transaction_history).reverse())
             }
 
             let result4 = await fetch(`${apiUrl}/coins/${symbol}`)
@@ -203,7 +203,7 @@ function CoinPage() {
                             </div> : <div></div>}
 
                 </div>
-                <div className="CoinPage__transactions">
+                {/* <div className="CoinPage__transactions">
                             <div className="CoinPage__transactiontabs">
                                 <span className="buy_tab active" onClick={buyTab}>Buy</span>
                                 <span className="sell_tab" onClick={sellTab}>Sell</span>
@@ -237,7 +237,7 @@ function CoinPage() {
                                     <button className="button is-link" onClick={makeSell}>Complete Order</button>
                                 </div>
                             </div>}
-                </div>
+                </div> */}
             </div>
         </>
     );

@@ -8,15 +8,19 @@ import re
 transactions_routes = Blueprint('transactions', __name__)
 
 
-@transactions_routes.route('/get_all/<int:id>', methods=['GET'])
+@transactions_routes.route('/get_all/<symbol>', methods=['GET'])
 @jwt_required
-def get_all(id):
+def get_all(symbol):
 
     #get id from json web token
     current_user_id = get_jwt_identity()
 
+    #find the id for the cryptocurrency in the transactions
+    coin = Cryptocurrency.query.filter(Cryptocurrency.symbol == symbol).first()
+
+
     #get all transactions for given user
-    transactions = Transaction.query.filter(Transaction.user_id == current_user_id, Transaction.crypto_currency_id).all()
+    transactions = Transaction.query.filter(Transaction.user_id == current_user_id, Transaction.crypto_currency_id == coin.id).all()
     results = [transaction.to_dict() for transaction in transactions]
     return {result['id']: result for result in results}
 
