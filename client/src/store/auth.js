@@ -50,10 +50,10 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
         throw response
       }
     //   //Place token in Local Storage, update Redux State
-      const { access_token, id} = await response.json();
+      const { access_token, id, first_name} = await response.json();
       localStorage.setItem('SESSION_TOKEN', access_token);
       localStorage.setItem('USER_ID', id);
-      dispatch(LoggedInAction());
+      dispatch(LoggedInAction(first_name));
     }
     catch (err) {
     //   const errJSON = await err.json()

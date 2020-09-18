@@ -24,7 +24,7 @@ def signup():
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(14))
 
     #create user in database
-    user_to_add = User(email=email, first_name=first_name, last_name=last_name, password=hashed_password, account_balance=0)
+    user_to_add = User(email=email, first_name=first_name, last_name=last_name, password=hashed_password, account_balance=100000)
     db.session.add(user_to_add)
     db.session.commit()
 
@@ -34,7 +34,7 @@ def signup():
 
     #create jwt and send back to frontend
     access_token = create_access_token(identity=temp_user['id'])
-    return {'access_token':access_token, 'id': temp_user['id']}, 200
+    return {'access_token':access_token, 'id': temp_user['id'], 'first_name': temp_user['first_name']}, 200
 
 @user_routes.route('/signin', methods=['POST'])
 def signin():
