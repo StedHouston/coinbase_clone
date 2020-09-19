@@ -132,7 +132,7 @@ function CoinPage() {
 
             })
         })
-        historyHook.push(`/coinpage/${name}/${symbol}`)
+        historyHook.push(`/price`)
     }
 
     const makeSell = async () => {
@@ -148,6 +148,7 @@ function CoinPage() {
                 'symbol': symbol
             })
         })
+        historyHook.push(`/price`)
     }
 
     return (
@@ -178,7 +179,7 @@ function CoinPage() {
                             <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span style={{color: 'red'}}>{usd_24h_change.toFixed(2)}%</span>
                         </div> : <div></div>}
                     { usd_24h_change && usd_24h_change > 0 ? <div className="CoinPageContainer__CurrentPrice">
-                            <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span style={{color: 'green'}}>{usd_24h_change.toFixed(2)}%</span>
+                            <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span style={{color: 'green'}}>+{usd_24h_change.toFixed(2)}%</span>
                         </div> : <div></div>}
                     <div className="CoinPageContainer__graph">
                         {prices && times ? <LineChart prices={prices} times={times}/> :

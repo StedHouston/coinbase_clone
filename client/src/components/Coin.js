@@ -32,7 +32,7 @@ function Coin(props) {
                         ${price.toLocaleString()}
                     </div>
                     {change > 0 ? <div className="Coin__financials--change" style={{color: 'green'}}>
-                                    {change.toFixed(2)}%
+                                    +{change.toFixed(2)}%
                                   </div> : <div className="Coin__financials--change" style={{color: 'red'}}>
                                     {change.toFixed(2)}%
                                   </div>}

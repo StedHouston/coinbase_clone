@@ -6,6 +6,7 @@ import Coin from './Coin';
 function PricesPage() {
 
     const [crypto, setCrypto] = useState('')
+    const [market_percentage_change, setMarket_percentage_change] = useState('')
 
     useEffect(() => {
         async function fetchCoins(){
@@ -13,6 +14,13 @@ function PricesPage() {
             let data = await results.json()
             setCrypto(data)
             console.log(data)
+            let total = 0;
+            for(let i = 0; i < data.length; i++){
+                total += data[i].price_change_percentage_24h;
+            }
+            console.log(total)
+            console.log((total / data.length).toFixed(2))
+            setMarket_percentage_change((total / data.length).toFixed(2))
         }
         fetchCoins()
     },[])
@@ -25,8 +33,9 @@ function PricesPage() {
                 <Navbar/>
                 <div className="PricesPage__SearchBar">
                     <div>
-                        <div>In the last 24 hours</div>
-                        <div>Market is up 3.22%</div>
+                        <div className="PricesPage__SearchBar--marketheadline1">In the last 24 hours</div>
+                        { market_percentage_change >= 0 ?<div className="PricesPage__SearchBar--marketheadline2">Market is up <span style={{color: 'green', fontSize: '20px',fontWeight: 'bolder'}}>{market_percentage_change}%</span></div> :
+                        <div className="PricesPage__SearchBar--marketheadline2">Market is down <span style={{color: 'red', fontSize: '20px', fontWeight: '800'}}>{market_percentage_change}%</span></div>}
                     </div>
                     <div className="field">
                         <div className="control">

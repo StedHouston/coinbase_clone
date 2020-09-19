@@ -11,8 +11,8 @@ with app.app_context():
   # ian = User(first_name = 'Ian', last_name = 'Bently', email = 'ian@aa.io', account_balance = 0)
   # stedman = User(first_name = 'Stedman', last_name = 'Houston', email = 'sted@aa.io', account_balance = 0)
   db.session.add_all([
-  # coin1 = Cryptocurrency(symbol = 'btc', name = 'Bitcoin', image_url = 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579')
-  # coin2 = Cryptocurrency(symbol = 'eth', name = 'Ethereum', image_url = 'https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880')
+  Cryptocurrency(symbol = 'btc', name = 'Bitcoin', image_url = 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'),
+  Cryptocurrency(symbol = 'eth', name = 'Ethereum', image_url = 'https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880'),
   Cryptocurrency(symbol = 'usdt', name = 'Tether', image_url = 'https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707'),
   Cryptocurrency(symbol = 'xrp', name = 'XRP', image_url = 'https://assets.coingecko.com/coins/images/44/large/xrp.png?1564480400'),
   Cryptocurrency(symbol = 'link', name = 'Chainlink', image_url = 'https://assets.coingecko.com/coins/images/877/large/chainlink-new-logo.png?1547034700'),

@@ -47,6 +47,15 @@ body{
     align-items: center;
 }
 
+.PricesPage__SearchBar--marketheadline1{
+    color: grey;
+    margin-top: 18px
+}
+
+.PricesPage__SearchBar--marketheadline2{
+    font-weight: 800;
+}
+
 .PricesPage__Results--Header{
     display: flex;
     height: 71px;
