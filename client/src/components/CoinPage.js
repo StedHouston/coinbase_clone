@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { apiUrl, baseUrl } from '../config';
 import Navbar from '../components/Navbar';
 import LineChart from '../components/LineChart';
 import Transaction from '../components/Transaction';
+import { UpdateFundsAction } from '../store/accountBalance';
 import 'bulma/css/bulma.css'
 
 
@@ -19,19 +20,21 @@ function CoinPage() {
     const [toggle, setToggle] = useState(true)
     const [user_amount, setUser_amount] = useState('')
     const [cost, setCost] = useState(0)
-    const [availableFunds, setAvailableFunds] = useState('')
+    const [availableCrypto, setAvailableCrypto] = useState('')
     const [history, setHistory] = useState([])
     const [prices, setPrices] = useState()
     const [times, setTimes] = useState()
     const [coinUrl, setCoinUrl] = useState('')
 
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
+    const account_balance = useSelector(state => state.UpdateFundsReducer.account_balance)
     const coin_info = useSelector(state => state.SendCoinReducer)
 
     let { name, symbol } = useParams();
     let historyHook = useHistory()
+    let dispatch = useDispatch()
 
-
+    console.log(loggedIn)
     useEffect(() => {
         async function fetchCoinData(){
 
@@ -67,12 +70,22 @@ function CoinPage() {
 
             let result4 = await fetch(`${apiUrl}/coins/${symbol}`)
             let coin = await result4.json()
+
+            let result5 = await fetch(`${apiUrl}/transactions/get_amount/${symbol}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
+                },
+            });
+            let crypto_available = await result5.json()
+            setAvailableCrypto(crypto_available.crypto_amount)
             setCoinUrl(coin.image_url)
             // setChart_data(array)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
             setUsd_24h_change(coin_data.usd_24h_change)
-            setUsd(coin_data.usd)
+            setUsd(coin_data.usd.toFixed(2))
             setPrices(prices)
             setTimes(times)
         }
@@ -132,6 +145,8 @@ function CoinPage() {
 
             })
         })
+        let funds = await response.json()
+        dispatch(UpdateFundsAction(funds.account_balance))
         historyHook.push(`/price`)
     }
 
@@ -148,6 +163,9 @@ function CoinPage() {
                 'symbol': symbol
             })
         })
+        // let funds = await response.json()
+
+        // dispatch(funds.account_balance)
         historyHook.push(`/price`)
     }
 
@@ -203,6 +221,9 @@ function CoinPage() {
                                 <div className="CoinPage__transactions--orderbutton">
                                     <button className="button is-link" onClick={makePurchase}>Complete Order</button>
                                 </div>
+                                <div className="CoinPage__transactions--coinsavailable">
+                                    <span style={{fontWeight: '600'}}>Current funds: </span> ${account_balance}
+                                </div>
                             </div> : <div>
                                 <div className="CoinPage__transactions--usd">
                                     <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
@@ -217,6 +238,9 @@ function CoinPage() {
                                 <div className="CoinPage__transactions--orderbutton">
                                     <button className="button is-link" onClick={makeSell}>Complete Order</button>
                                 </div>
+                                <div className="CoinPage__transactions--coinsavailable">
+                                    <span style={{fontWeight: '600', padding:'10px'}}>{availableCrypto} {symbol.toUpperCase()} available </span>
+                                </div>
                         </div>}
                 </div>
                     </div>
@@ -230,8 +254,8 @@ function CoinPage() {
                             ${usd_24h_vol.toLocaleString()}
                         </div>
                         <div className="CoinPageContainer__CoinDetails--circulatingsupply">
-                            <div>circulating supply</div>
-                            18.5M {symbol.toUpperCase()}
+                            <div>Circulating supply</div>
+                            {coin_info.circulatingSupply.toLocaleString()} {symbol.toUpperCase()}
                         </div>
                     </div>
                     <div className="CoinPageContainer__History__Title">Transaction History</div>
