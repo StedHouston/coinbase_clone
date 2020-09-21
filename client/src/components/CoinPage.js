@@ -79,6 +79,7 @@ function CoinPage() {
                 },
             });
             let crypto_available = await result5.json()
+            console.log(crypto_available.crypto_amount)
             setAvailableCrypto(crypto_available.crypto_amount)
             setCoinUrl(coin.image_url)
             // setChart_data(array)

@@ -55,7 +55,8 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
       const { access_token, id, first_name, account_balance} = await response.json();
       localStorage.setItem('SESSION_TOKEN', access_token);
       localStorage.setItem('USER_ID', id);
-      dispatch(LoggedInAction(first_name, account_balance));
+      dispatch(LoggedInAction(first_name));
+      dispatch(UpdateFundsAction(account_balance))
     }
     catch (err) {
     //   const errJSON = await err.json()
