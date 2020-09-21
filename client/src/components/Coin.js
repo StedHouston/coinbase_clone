@@ -5,14 +5,14 @@ import { SendCoinAction } from '../store/currentCoin';
 
 
 function Coin(props) {
-    const { id, name, number, symbol, image, price, change, marketcap } = props;
+    const { id, name, number, symbol, image, price, change, marketcap, circulatingSupply } = props;
 
     let dispatch = useDispatch();
     let history = useHistory();
 
     const handleClick = (e) => {
         e.preventDefault();
-        dispatch(SendCoinAction(id, name, symbol, image))
+        dispatch(SendCoinAction(id, name, symbol, image, circulatingSupply))
         history.push(`/coinpage/${name}/${symbol}`)
     }
 

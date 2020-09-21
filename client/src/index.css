@@ -270,7 +270,7 @@ body{
 .CoinPage__transactions{
     border: 2px solid black;
     border-radius: 5px;
-    height: 200px;
+    height: 235px;
     /* width: 300px; */
 
 }
@@ -296,6 +296,14 @@ body{
 .CoinPage__transactions--orderbutton{
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.CoinPage__transactions--coinsavailable{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 43px
 }
 
 .CoinPageContainer__History__Title{
@@ -410,6 +418,11 @@ body{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.Transaction__Container--rightside{
+    /* border: 1px solid black; */
+    width: 20%;
 }
 
 .Portfolio{

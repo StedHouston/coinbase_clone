@@ -16,11 +16,11 @@ function Transaction(props) {
         <>
             <div className="Transaction__Container">
                 <div>
-                    <div>{transaction_type} {name}</div>
+                    <div style={{fontWeight: 'bold'}}>{transaction_type} {name}</div>
                     <div>{updated_date}</div>
                 </div>
-                <div>
-                    <div>${usd_amount.toLocaleString()}</div>
+                <div className="Transaction__Container--rightside">
+                    <div style={{fontWeight: 'bold'}}>${usd_amount.toLocaleString()}</div>
                     <div>{crypto_amount} {symbol.toUpperCase()} at ${price_per_coin.toLocaleString()}</div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import { baseUrl } from '../config';
-
+import { UpdateFundsAction } from './accountBalance';
 const LOGGED_IN = 'LOGGED_IN';
 const LOGGED_OUT = 'LOGGED_OUT';
 
@@ -8,7 +8,7 @@ export const LoggedInAction = (first_name) => {
     return {
         type: LOGGED_IN,
         loggedIn: true,
-        name: first_name
+        name: first_name,
     }
 }
 
@@ -16,9 +16,11 @@ export const LoggedOutAction = () => {
     return {
         type: LOGGED_OUT,
         loggedIn: false,
-        name: ''
+        name: '',
     }
 }
+
+
 
 //Reducers
 export default function LoggedInReducer(state = {loggedIn: false, name: ''}, action) {
@@ -50,10 +52,10 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
         throw response
       }
     //   //Place token in Local Storage, update Redux State
-      const { access_token, id, first_name} = await response.json();
+      const { access_token, id, first_name, account_balance} = await response.json();
       localStorage.setItem('SESSION_TOKEN', access_token);
       localStorage.setItem('USER_ID', id);
-      dispatch(LoggedInAction(first_name));
+      dispatch(LoggedInAction(first_name, account_balance));
     }
     catch (err) {
     //   const errJSON = await err.json()
@@ -82,10 +84,11 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
         throw response
       }
     //   //Place token in Local Storage, update Redux State
-      const { access_token, id, first_name} = await response.json();
+      const { access_token, id, first_name, account_balance} = await response.json();
       localStorage.setItem('SESSION_TOKEN', access_token);
       localStorage.setItem('USER_ID', id);
       dispatch(LoggedInAction(first_name));
+      dispatch(UpdateFundsAction(account_balance))
     }
     catch (err) {
     //   const errJSON = await err.json()

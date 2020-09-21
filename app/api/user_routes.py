@@ -34,7 +34,7 @@ def signup():
 
     #create jwt and send back to frontend
     access_token = create_access_token(identity=temp_user['id'])
-    return {'access_token':access_token, 'id': temp_user['id'], 'first_name': temp_user['first_name']}, 200
+    return {'access_token':access_token, 'id': temp_user['id'], 'first_name': temp_user['first_name'], 'account_balance': 100000}, 200
 
 @user_routes.route('/signin', methods=['POST'])
 def signin():
@@ -54,13 +54,14 @@ def signin():
     return {
         'access_token':access_token,
         'id': temp_user['id'],
-        'first_name': temp_user['first_name']
+        'first_name': temp_user['first_name'],
+        'account_balance': temp_user['account_balance']
         }, 200
 
 
-@user_routes.route('/<int:id>', methods=['GET','PATCH'])
+@user_routes.route('/', methods=['GET','PATCH'])
 @jwt_required
-def user_page(id):
+def user_page():
     if request.method == 'GET':
         found_user = User.query.filter(User.id == id).first()
         if found_user:
