@@ -24,6 +24,43 @@ def get_all(symbol):
     results = [transaction.to_dict() for transaction in transactions]
     return {result['id']: result for result in results}
 
+@transactions_routes.route('/get_portfolio', methods=['GET'])
+@jwt_required
+def get_portfolio():
+
+    #get id from json web token
+    current_user_id = get_jwt_identity()
+
+    #get all coins
+    coins = Cryptocurrency.query.filter().all()
+    coin_list = [coin.to_dict() for coin in coins]
+
+    #get all transactions for given user
+    transactions = Transaction.query.filter(Transaction.user_id == current_user_id).join(Cryptocurrency).all()
+
+    results = [transaction.to_dict() for transaction in transactions]
+
+    #total calculate which and how much cryptocurrency the user has
+    portfolio = {}
+    for transaction in results:
+        symbol = transaction['coin']['symbol']
+        if symbol not in portfolio and transaction['transaction_type'] == 'Bought':
+            portfolio[symbol] = transaction['crypto_amount']
+            continue
+        if symbol not in portfolio and transaction['transaction_type'] == 'Sold':
+            portfolio[symbol] = 0 - transaction['crypto_amount']
+            continue
+        if symbol in portfolio and transaction['transaction_type'] == 'Bought':
+            portfolio[symbol] = round(portfolio[symbol] + transaction['crypto_amount'], 2)
+            continue
+        if symbol in portfolio and transaction['transaction_type'] == 'Sold':
+            portfolio[symbol] = round(portfolio[symbol] - transaction['crypto_amount'], 2)
+            continue
+
+    return {'portfolio': portfolio}
+
+
+
 
 
 

@@ -29,6 +29,7 @@ class Cryptocurrency(db.Model):
   symbol = db.Column(db.String(10), nullable = False)
   name = db.Column(db.String(50), nullable = False)
   image_url = db.Column(db.String, nullable = True)
+  Transactions = db.relationship('Transaction')
 
   def to_dict(self):
     return {
@@ -49,8 +50,10 @@ class Transaction(db.Model):
   date = db.Column(db.Date, nullable = False)
   user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
   crypto_currency_id = db.Column(db.Integer, db.ForeignKey("cryptocurrencies.id"), nullable = False)
+  coin = db.relationship('Cryptocurrency')
 
   def to_dict(self):
+
     return {
       "id": self.id,
       "transaction_type": self.transaction_type,
@@ -59,5 +62,6 @@ class Transaction(db.Model):
       "price_per_coin": self.price_per_coin,
       "date": self.date,
       "user_id": self.user_id,
-      "crypto_currency_id": self.crypto_currency_id
+      "crypto_currency_id": self.crypto_currency_id,
+      "coin": self.coin.to_dict()
     }

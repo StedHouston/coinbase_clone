@@ -58,6 +58,30 @@ def signin():
         'account_balance': temp_user['account_balance']
         }, 200
 
+@user_routes.route('/add_funds', methods=['POST'])
+@jwt_required
+def add_funds():
+    #gather amount of funds to add from the user
+    funds_to_add = float(request.json.get('funds_to_add'))
+
+    #get id from json web token
+    current_user_id = get_jwt_identity()
+
+    #retrieve user given id if exists
+    temp_user = User.query.filter(User.id == current_user_id).first()
+    if temp_user is None:
+        return {'error': 'User with given id does not exist'}, 400
+
+    #increase users account balance by the amount of funds to add
+    temp_user.account_balance += funds_to_add
+
+    #save and commit the change to the database
+    db.session.add(temp_user)
+    db.session.commit()
+
+    return {'account_balance': temp_user.account_balance}, 200
+
+
 
 @user_routes.route('/', methods=['GET','PATCH'])
 @jwt_required
