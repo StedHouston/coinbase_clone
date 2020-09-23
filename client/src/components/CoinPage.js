@@ -164,9 +164,9 @@ function CoinPage() {
                 'symbol': symbol
             })
         })
-        // let funds = await response.json()
+        let funds = await response.json()
 
-        // dispatch(funds.account_balance)
+        dispatch(UpdateFundsAction(funds.account_balance))
         historyHook.push(`/price`)
     }
 

@@ -56,9 +56,9 @@ def crypto_buy():
         return {'error': 'User does not have enough funds for purchase'}
 
     #deduct money from users account to cover purchase
-    temp_user.account_balance -= cost
+    temp_user.account_balance = temp_user.account_balance - cost
     print("------------------")
-    print(temp_user.account_balance)
+    temp_user.account_balance = round(temp_user.account_balance, 2)
 
     today = date.today()
     d1 = today.strftime("%m/%d/%Y")
@@ -106,10 +106,11 @@ def crypto_sell():
         today = date.today()
         d1 = today.strftime("%m/%d/%Y")
         new_transaction = Transaction(transaction_type='Sold', crypto_amount=crypto_amount, usd_amount=sold_amount, price_per_coin=usd_cost_per_coin, date=d1, user_id=current_user_id, crypto_currency_id=coin.id)
-        temp_user.account_balance += sold_amount
+        temp_user.account_balance = round(temp_user.account_balance + sold_amount, 2)
         db.session.add(new_transaction)
+        db.session.add(temp_user)
         db.session.commit()
-        return {'msg': 'success'}
+        return {"account_balance": temp_user.account_balance}
     else:
         return {'error': 'Not enough funds'}
 
@@ -144,4 +145,4 @@ def get_amount(symbol):
         if item['transaction_type'] == 'Sold':
             total -= item['crypto_amount']
 
-    return {'crypto_amount': total}
+    return {'crypto_amount': round(total, 2)}
