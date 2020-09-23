@@ -27,7 +27,7 @@ def upgrade():
     )
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('transaction_type', sa.String(length=5), nullable=False),
+    sa.Column('transaction_type', sa.String(), nullable=False),
     sa.Column('crypto_amount', sa.Float(), nullable=False),
     sa.Column('usd_amount', sa.Float(), nullable=False),
     sa.Column('price_per_coin', sa.Float(), nullable=False),

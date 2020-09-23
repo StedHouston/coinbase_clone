@@ -42,7 +42,7 @@ class Transaction(db.Model):
   __tablename__ = 'transactions'
 
   id = db.Column(db.Integer, primary_key = True)
-  transaction_type = db.Column(db.String(5), nullable = False)
+  transaction_type = db.Column(db.String(), nullable = False)
   crypto_amount = db.Column(db.Float, nullable = False)
   usd_amount = db.Column(db.Float, nullable = False)
   price_per_coin = db.Column(db.Float, nullable = False)
