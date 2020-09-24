@@ -57,7 +57,7 @@ def get_portfolio():
             portfolio[symbol] = round(portfolio[symbol] - transaction['crypto_amount'], 2)
             continue
 
-    return {'portfolio': portfolio}
+    return {'portfolio': portfolio, 'coin_list': coin_list}
 
 
 

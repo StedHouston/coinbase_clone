@@ -41,6 +41,7 @@ function CoinPage() {
 
             let results = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin_info.id}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
             let data = await results.json()
+            console.log(coin_info.id)
             let coin_data = data[coin_info.id]
 
 

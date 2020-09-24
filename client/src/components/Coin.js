@@ -11,7 +11,6 @@ function Coin(props) {
     let history = useHistory();
 
     const handleClick = (e) => {
-        e.preventDefault();
         dispatch(SendCoinAction(id, name, symbol, image, circulatingSupply))
         history.push(`/coinpage/${name}/${symbol}`)
     }

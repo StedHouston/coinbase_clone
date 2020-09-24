@@ -1,29 +1,43 @@
 import React from 'react';
-
-
+import { SendCoinAction } from '../store/currentCoin';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function MiniTransaction(props) {
-    let {name, symbol, transaction_type, date, usd_amount, crypto_amount, price_per_coin } = props;
-    let newDate = []
-    let date_array = date.split(' ')
-    newDate.push(date_array[2])
-    newDate.push(date_array[1] + ',')
-    newDate.push(date_array[3])
-    let updated_date = newDate.join(' ');
+    let { symbol, amount, list } = props;
 
+    let dispatch = useDispatch()
+    let history = useHistory()
+    let name = '';
+    let image = '';
+    let id = '';
+    let circulatingSupply = 18243829
+
+
+    for(let i = 0; i < list.length; i++){
+        if(list[i].symbol === symbol){
+            name = list[i].name
+            image = list[i].image_url
+            id = name.toLowerCase()
+        }
+    }
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        dispatch(SendCoinAction(id, name, symbol, image, circulatingSupply))
+        history.push(`/coinpage/${name}/${symbol}`)
+    }
 
     return (
         <>
-            <div className="MiniTransaction__Container">
-                <div>
-                    <div style={{fontWeight: 'bold'}}>{transaction_type} {name}</div>
-                    <div>{updated_date}</div>
-                </div>
-                <div className="MiniTransaction__Container--rightside">
-                    <div style={{fontWeight: 'bold'}}>${usd_amount.toLocaleString()}</div>
-                    <div>{crypto_amount} {symbol.toUpperCase()} at ${price_per_coin.toLocaleString()}</div>
-                </div>
-            </div>
+             <div className="MiniTransaction__Container" onClick={handleClick}>
+                    <div>
+                        <div style={{fontWeight: 'bold'}}>{name}</div>
+                    </div>
+                    <div className="MiniTransaction__Container--rightside">
+                        <div style={{fontWeight: 'bold'}}>{symbol.toUpperCase()} {amount}</div>
+                    </div>
+             </div>
         </>
     );
 }
