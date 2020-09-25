@@ -5,8 +5,8 @@ from app import app, db
 from app.models import User, Cryptocurrency
 
 with app.app_context():
-  # db.drop_all()
-  # db.create_all()
+  db.drop_all()
+  db.create_all()
 
   # ian = User(first_name = 'Ian', last_name = 'Bently', email = 'ian@aa.io', account_balance = 0)
   # stedman = User(first_name = 'Stedman', last_name = 'Houston', email = 'sted@aa.io', account_balance = 0)
