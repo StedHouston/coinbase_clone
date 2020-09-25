@@ -13,7 +13,6 @@ function Signin_page() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(signIn(email, password))

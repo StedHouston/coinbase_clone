@@ -1,5 +1,6 @@
 import { baseUrl } from '../config';
 import { UpdateFundsAction } from './accountBalance';
+import { UpdateErrorsAction } from './errors';
 const LOGGED_IN = 'LOGGED_IN';
 const LOGGED_OUT = 'LOGGED_OUT';
 
@@ -82,7 +83,10 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
       });
 
       if (!response.ok) {
-        throw response
+        const { errors } = await response.json()
+        dispatch(UpdateErrorsAction(errors))
+
+        // throw response
       }
     //   //Place token in Local Storage, update Redux State
       const { access_token, id, first_name, account_balance} = await response.json();
