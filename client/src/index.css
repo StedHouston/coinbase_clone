@@ -437,6 +437,7 @@ body{
     margin-bottom: 20px;
     padding-left: 5px;
     padding-right: 5px;
+    cursor: pointer;
     /* background-color: rgb(21,82,240) */
 }
 

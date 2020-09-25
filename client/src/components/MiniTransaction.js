@@ -35,7 +35,7 @@ function MiniTransaction(props) {
                         <div style={{fontWeight: 'bold'}}>{name}</div>
                     </div>
                     <div className="MiniTransaction__Container--rightside">
-                        <div style={{fontWeight: 'bold'}}>{symbol.toUpperCase()} {amount}</div>
+                        <div style={{fontWeight: 'bold'}}>{amount} {symbol.toUpperCase()}</div>
                     </div>
              </div>
         </>
