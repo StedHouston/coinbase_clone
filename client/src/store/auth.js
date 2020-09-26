@@ -71,7 +71,7 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
       // formData.append("email", email)
       // formData.append("password", password)
 
-      const response = await fetch(`${baseUrl}api/users/signin`, {
+      const response = await fetch(`${baseUrl}/api/users/signin`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
