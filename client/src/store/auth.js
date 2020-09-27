@@ -1,6 +1,5 @@
 import { baseUrl } from '../config';
 import { UpdateFundsAction } from './accountBalance';
-import { UpdateErrorsAction } from './errors';
 const LOGGED_IN = 'LOGGED_IN';
 const LOGGED_OUT = 'LOGGED_OUT';
 

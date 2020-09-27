@@ -56,7 +56,7 @@ function Signin_page() {
             <div className="SignupPage">
                 <div className="SignupPage__Title">Sign in to Coinbase</div>
                 <div className="SigninPage__Form">
-                {errors.map(error => <div style={{color: 'red', fontWeight: 'bolder'}}>{error}</div>)}
+                {errors.map(error => <div className="error">{error}</div>)}
                     <div className="field">
                         <div className="control">
                             <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>

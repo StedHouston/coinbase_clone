@@ -78,7 +78,7 @@ def crypto_buy():
     #retrieve user given id if exists
     temp_user = User.query.filter(User.id == current_user_id).first()
     if temp_user is None:
-        return {'error': 'User with given id does not exist'}, 400
+        return {'error': 'Please signin to purchase'}, 400
 
     #retrieve crypto id given symbol
     coin = Cryptocurrency.query.filter(Cryptocurrency.symbol == symbol).first()
@@ -90,11 +90,10 @@ def crypto_buy():
 
     #check if user has enough funds to purchase
     if temp_user.account_balance < cost:
-        return {'error': 'User does not have enough funds for purchase'}
+        return {'error': 'Not have enough funds for purchase'}, 400
 
     #deduct money from users account to cover purchase
     temp_user.account_balance = temp_user.account_balance - cost
-    print("------------------")
     temp_user.account_balance = round(temp_user.account_balance, 2)
 
     today = date.today()
@@ -149,7 +148,7 @@ def crypto_sell():
         db.session.commit()
         return {"account_balance": temp_user.account_balance}
     else:
-        return {'error': 'Not enough funds'}
+        return {'error': 'Not enough funds'}, 400
 
 
 @transactions_routes.route('/get_amount/<symbol>', methods=['GET'])

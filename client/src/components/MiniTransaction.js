@@ -30,7 +30,7 @@ function MiniTransaction(props) {
 
     return (
         <>
-             <div className="MiniTransaction__Container" onClick={handleClick}>
+             <div className="MiniTransaction__Container border" onClick={handleClick}>
                     <div>
                         <div style={{fontWeight: 'bold'}}>{name}</div>
                     </div>

@@ -25,6 +25,7 @@ function CoinPage() {
     const [prices, setPrices] = useState()
     const [times, setTimes] = useState()
     const [coinUrl, setCoinUrl] = useState('')
+    const [errors, setErrors] = useState([''])
 
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
     const account_balance = useSelector(state => state.UpdateFundsReducer.account_balance)
@@ -147,6 +148,19 @@ function CoinPage() {
 
             })
         })
+
+        if(!response.ok){
+            let {error, msg } = await response.json()
+            if(msg){
+                setErrors(['Please signin to purchase'])
+                return;
+            }
+            console.log(msg)
+            console.log(error)
+            setErrors([error])
+            return;
+
+        }
         let funds = await response.json()
         dispatch(UpdateFundsAction(funds.account_balance))
         historyHook.push(`/price`)
@@ -165,7 +179,19 @@ function CoinPage() {
                 'symbol': symbol
             })
         })
+
+        if(!response.ok){
+            let {error, msg } = await response.json()
+            if(msg){
+                setErrors(['Please signin to sell'])
+                return;
+            }
+            setErrors([error])
+            return;
+        }
+
         let funds = await response.json()
+
 
         dispatch(UpdateFundsAction(funds.account_balance))
         historyHook.push(`/price`)
@@ -226,6 +252,7 @@ function CoinPage() {
                                 <div className="CoinPage__transactions--coinsavailable">
                                     <span style={{fontWeight: '600'}}>Current funds: </span> ${account_balance}
                                 </div>
+                            {errors.map(error => <div className="error">{error}</div>)}
                             </div> : <div>
                                 <div className="CoinPage__transactions--usd">
                                     <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
@@ -243,6 +270,7 @@ function CoinPage() {
                                 <div className="CoinPage__transactions--coinsavailable">
                                     <span style={{fontWeight: '600', padding:'10px'}}>{availableCrypto} {symbol.toUpperCase()} available </span>
                                 </div>
+                                {errors.map(error => <div className="error">{error}</div>)}
                         </div>}
                 </div>
                     </div>
