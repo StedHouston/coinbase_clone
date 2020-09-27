@@ -14,9 +14,10 @@ def signup():
     first_name = request.form.get('first_name')
     last_name = request.form.get('last_name')
     password = request.form.get('password')
+    confirmPassword = request.form.get('confirmPassword')
 
     #validations
-    errors = validations_signup(email, first_name, last_name, password)
+    errors = validations_signup(email, first_name, last_name, password, confirmPassword)
     if len(errors) > 0:
         return {'errors': errors}, 401
 
@@ -121,7 +122,7 @@ def user_page():
 
 
 #Validations below
-def validations_signup(email, first_name, last_name, password):
+def validations_signup(email, first_name, last_name, password, confirmPassword):
     regex ='[^@]+@[^@]+\.[^@]+'
     errors = []
     #Check Email is Unique
@@ -129,55 +130,59 @@ def validations_signup(email, first_name, last_name, password):
     if(email_found):
         errors.append('Account already exists with this email address')
     if not email:
-        errors.append('Email is missing')
+        errors.append('Email is required')
     if not first_name:
-        errors.append('first name is missing')
+        errors.append('First name is required')
     if not last_name:
-        errors.append('last name is missing')
+        errors.append('Last name is required')
     if not password:
-        errors.append('password is missing')
+        errors.append('Password is required')
     if not re.search(regex, email):
-        errors.append('email is not valid')
+        errors.append('Email is not valid')
+    if password != confirmPassword:
+        errors.append('Passwords do not match')
     if len(first_name) > 40:
-        errors.append('first name is too long')
+        errors.append('First name is too long')
     if len(last_name) > 40:
-        errors.append('last name is too long')
+        errors.append('Last name is too long')
     if len(email) > 255:
-        errors.append('email length is too long')
+        errors.append('Email length is too long')
     return errors
 
 def validations_signin(email, password):
     errors = []
+    if not email:
+        errors.append('Email is required')
+    if not password:
+        errors.append('Password is required')
+    if len(email) > 255:
+        errors.append('Email length is too long')
+    if len(errors) > 0:
+        return errors
     user = User.query.filter_by(email=email).first()
     if not user:
         errors.append('User was not found')
         return errors
     if user:
         password_match = bcrypt.checkpw(password.encode('utf-8'), user.password)
-        if not email:
-            errors.append('Email is missing')
-        if not password:
-            errors.append('Password is missing')
         if not password_match:
             errors.append('Password is incorrect')
-        if len(email) > 255:
-            errors.append('email length is too long')
     return errors
 
 def validations_user_details(last_name, first_name):
     errors = []
     if not last_name:
-        errors.append('first name is missing')
+        errors.append('First name is required')
     if not first_name:
-        errors.append('last name is missing')
+        errors.append('Last name is required')
     if len(errors) > 0:
         return errors
     if len(last_name) > 40:
-        errors.append('last name length is too long')
+        errors.append('Last name length is too long')
     if len(first_name) > 40:
-        errors.append('first name length is too long')
+        errors.append('First name length is too long')
     if len(last_name) < 1:
-        errors.append('last name was not provided')
+        errors.append('Last name was not provided')
     if len(first_name) < 1:
-        errors.append('first name was not provided')
+        errors.append('First name was not provided')
     return errors
