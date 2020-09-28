@@ -3,13 +3,17 @@ load_dotenv()
 
 from app import app, db
 from app.models import User, Cryptocurrency
+import bcrypt
 
 with app.app_context():
   db.drop_all()
   db.create_all()
 
+  hashed_password = bcrypt.hashpw('password'.encode('utf-8'), bcrypt.gensalt(14))
+  # User(first_name = 'Demo User', last_name = 'Sparks', email = 'demoUser@aa.io', password = '$2b$14$BcvGNBC6FqNWEnLRfUp33eDF3usbEZG3BXHLtQV4uhXDCC6gjRsWy', account_balance = 50000),
+
   db.session.add_all([
-  User(first_name = 'Demo User', last_name = 'Sparks', email = 'demoUser@aa.io', password = '$2b$14$BcvGNBC6FqNWEnLRfUp33eDF3usbEZG3BXHLtQV4uhXDCC6gjRsWy', account_balance = 50000),
+  User(first_name = 'Demo User', last_name = 'Sparks', email = 'demoUser@aa.io', password = hashed_password, account_balance = 50000),
   Cryptocurrency(symbol = "btc", name = "Bitcoin", image_url = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"),
   Cryptocurrency(symbol = "eth", name = "Ethereum", image_url = "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"),
   Cryptocurrency(symbol = "usdt", name = "Tether", image_url = "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707"),
