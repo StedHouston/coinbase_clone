@@ -5,7 +5,6 @@ import Highcharts from 'highcharts';
 
 const LineChart = (props) => {
   let { prices, times } = props;
-  console.log(times)
 
   let newTimes = []
   for(let i = 0; i < times.length; i++){
@@ -20,9 +19,6 @@ const LineChart = (props) => {
       const updatedDate = list[1].slice(0, 5) + ` ${list[2]}`
       newTimes.push(updatedDate)
     }
-
-
-    // newTimes.push(humanDateFormat)
   }
 
 
@@ -46,7 +42,8 @@ const LineChart = (props) => {
       },
     },
     series: [
-      { data: prices }
+      { data: prices,
+        showInLegend: false }
     ],
     chart: {
       width: 725

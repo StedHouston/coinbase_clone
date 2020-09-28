@@ -8,9 +8,8 @@ with app.app_context():
   db.drop_all()
   db.create_all()
 
-  # ian = User(first_name = 'Ian', last_name = 'Bently', email = 'ian@aa.io', account_balance = 0)
-  # stedman = User(first_name = 'Stedman', last_name = 'Houston', email = 'sted@aa.io', account_balance = 0)
   db.session.add_all([
+  User(first_name = 'Demo User', last_name = 'Sparks', email = 'demoUser@aa.io', password = '$2b$14$BcvGNBC6FqNWEnLRfUp33eDF3usbEZG3BXHLtQV4uhXDCC6gjRsWy', account_balance = 50000),
   Cryptocurrency(symbol = "btc", name = "Bitcoin", image_url = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"),
   Cryptocurrency(symbol = "eth", name = "Ethereum", image_url = "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"),
   Cryptocurrency(symbol = "usdt", name = "Tether", image_url = "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707"),
@@ -113,10 +112,5 @@ with app.app_context():
   Cryptocurrency(symbol = "nano", name = "Nano", image_url = "https://assets.coingecko.com/coins/images/756/large/nano-coin-logo.png?1547034501")
   ])
 
-
-  # db.session.add(ian)
-  # db.session.add(stedman)
-  # db.session.add(john)
-  # db.session.add(mike)
 
   db.session.commit()

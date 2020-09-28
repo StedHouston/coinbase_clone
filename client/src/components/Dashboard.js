@@ -49,7 +49,6 @@ function Dashboard() {
                     {portfolio[0] && crypto_list[0] ? portfolio.map(ele =>
                             <MiniTransaction key={ele.id} symbol={ele.name} amount={ele.amount} list={crypto_list}/>) : <div></div>}
                 </div>
-
             </div>
         </>
     );

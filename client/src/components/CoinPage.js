@@ -55,7 +55,6 @@ function CoinPage() {
             for(let i = 0; i < data_list.length; i++){
                 prices.push(data_list[i].open)
                 times.push(data_list[i].time)
-
             }
 
             if (loggedIn){
@@ -84,7 +83,6 @@ function CoinPage() {
             console.log(crypto_available.crypto_amount)
             setAvailableCrypto(crypto_available.crypto_amount)
             setCoinUrl(coin.image_url)
-            // setChart_data(array)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
             setUsd_24h_change(coin_data.usd_24h_change)
@@ -155,8 +153,6 @@ function CoinPage() {
                 setErrors(['Please signin to purchase'])
                 return;
             }
-            console.log(msg)
-            console.log(error)
             setErrors([error])
             return;
 

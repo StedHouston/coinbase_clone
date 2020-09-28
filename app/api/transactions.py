@@ -90,7 +90,7 @@ def crypto_buy():
 
     #check if user has enough funds to purchase
     if temp_user.account_balance < cost:
-        return {'error': 'Not have enough funds for purchase'}, 400
+        return {'error': 'Not enough funds for purchase'}, 400
 
     #deduct money from users account to cover purchase
     temp_user.account_balance = temp_user.account_balance - cost
