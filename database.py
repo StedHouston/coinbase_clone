@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app import app, db
-from app.models import User, Cryptocurrency
+from app.models import User, Cryptocurrency, Transaction
 import bcrypt
 
 with app.app_context():
@@ -14,6 +14,7 @@ with app.app_context():
 
   db.session.add_all([
   User(first_name = 'Demo User', last_name = 'Sparks', email = 'demoUser@aa.io', password = hashed_password, account_balance = 50000),
+  User(first_name = 'Stedman', last_name = 'Houston', email = 'sted@gmail.com', password = hashed_password, account_balance = 50000),
   Cryptocurrency(symbol = "btc", name = "Bitcoin", image_url = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"),
   Cryptocurrency(symbol = "eth", name = "Ethereum", image_url = "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"),
   Cryptocurrency(symbol = "usdt", name = "Tether", image_url = "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707"),
@@ -113,7 +114,15 @@ with app.app_context():
   Cryptocurrency(symbol = "rvn", name = "Ravencoin", image_url = "https://assets.coingecko.com/coins/images/3412/large/ravencoin.png?1548386057"),
   Cryptocurrency(symbol = "mana", name = "Decentraland", image_url = "https://assets.coingecko.com/coins/images/878/large/decentraland-mana.png?1550108745"),
   Cryptocurrency(symbol = "tkx", name = "Tokenize Xchange", image_url = "https://assets.coingecko.com/coins/images/4984/large/Tokenize.png?1561602968"),
-  Cryptocurrency(symbol = "nano", name = "Nano", image_url = "https://assets.coingecko.com/coins/images/756/large/nano-coin-logo.png?1547034501")
+  Cryptocurrency(symbol = "nano", name = "Nano", image_url = "https://assets.coingecko.com/coins/images/756/large/nano-coin-logo.png?1547034501"),
+  Transaction(transaction_type = "Bought", crypto_amount = 2.5, usd_amount=26794.17, price_per_coin= 10717.67, date="2020-06-22", user_id = 2, crypto_currency_id = 1),
+  Transaction(transaction_type = "Bought", crypto_amount = 68, usd_amount=24047.52, price_per_coin= 353.64, date="2020-07-08", user_id = 2, crypto_currency_id = 2),
+  Transaction(transaction_type = "Bought", crypto_amount = 1000, usd_amount=240, price_per_coin= 0.24, date="2020-08-13", user_id = 2, crypto_currency_id = 4),
+  Transaction(transaction_type = "Bought", crypto_amount = 105.5, usd_amount=10387.53, price_per_coin= 98.46, date="2020-09-15", user_id = 2, crypto_currency_id = 17),
+  Transaction(transaction_type = "Bought", crypto_amount = 648, usd_amount=7017.84, price_per_coin= 10.83, date="2020-06-22", user_id = 2, crypto_currency_id = 5),
+  Transaction(transaction_type = "Bought", crypto_amount = 2, usd_amount=21480.66, price_per_coin= 10740.33, date="2020-09-02", user_id = 2, crypto_currency_id = 1),
+  Transaction(transaction_type = "Bought", crypto_amount = 8, usd_amount=368.08, price_per_coin= 46.01, date="2020-09-27", user_id = 2, crypto_currency_id = 10),
+  Transaction(transaction_type = "Sold", crypto_amount = 2.1, usd_amount=22015.56, price_per_coin= 10483.60, date="2020-10-01", user_id = 2, crypto_currency_id = 1)
   ])
 
 

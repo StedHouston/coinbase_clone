@@ -46,7 +46,7 @@ function Signin_page() {
             let errors = ['There was an error. Please try again later']
             setErrors(errors)
           }
-        history.push('/price')
+        history.push('/')
     }
 
     const demoLogin = async () => {
@@ -77,7 +77,7 @@ function Signin_page() {
         let errors = ['There was an error. Please try again later']
         setErrors(errors)
       }
-  history.push('/price')
+  history.push('/')
     }
 
     return (

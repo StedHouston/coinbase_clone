@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { apiUrl, baseUrl } from '../config';
+import { apiUrl, baseUrl, api_key } from '../config';
 import Navbar from '../components/Navbar';
 import LineChart from '../components/LineChart';
 import Transaction from '../components/Transaction';
@@ -46,7 +46,7 @@ function CoinPage() {
             let coin_data = data[coin_info.id]
 
 
-            let results2 = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${coin_info.symbol}&tsym=USD&limit=20&api_key=533034e0c596e9e29966a48d59566595dc3053fa219ea940a8e244a951936f7a`)
+            let results2 = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${coin_info.symbol}&tsym=USD&limit=20&api_key=${api_key}`)
             let past_data = await results2.json()
 
             let data_list = past_data.Data.Data
