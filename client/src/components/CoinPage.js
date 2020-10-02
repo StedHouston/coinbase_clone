@@ -159,7 +159,7 @@ function CoinPage() {
         }
         let funds = await response.json()
         dispatch(UpdateFundsAction(funds.account_balance))
-        historyHook.push(`/price`)
+        historyHook.push(`/`)
     }
 
     const makeSell = async () => {
@@ -190,7 +190,7 @@ function CoinPage() {
 
 
         dispatch(UpdateFundsAction(funds.account_balance))
-        historyHook.push(`/price`)
+        historyHook.push(`/`)
     }
 
     return (

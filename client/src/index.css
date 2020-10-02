@@ -169,7 +169,6 @@ body{
 
 .CoinPageContainer{
     padding: 48px;
-    border: 1px solid black;
     width: 100%;
 }
 
@@ -274,7 +273,7 @@ body{
 }
 
 .CoinPage__transactions{
-    border: 2px solid black;
+    border: 2px solid lightgrey;
     border-radius: 5px;
     height: 235px;
     /* width: 300px; */
@@ -459,7 +458,8 @@ body{
     padding-left: 5px;
     padding-right: 5px;
     cursor: pointer;
-    /* background-color: rgb(21,82,240) */
+    background-color: white;
+    border-radius: 8px;
 }
 
 .Portfolio{
@@ -511,6 +511,7 @@ body{
     height: 100vh;
     padding: 84px;
     border: 1px solid black;
+    background-color: rgb(21,82,240);
 }
 
 .Dashboard__Main{
@@ -518,6 +519,8 @@ body{
     justify-content: center;
     height: 140px;
     width: 60%;
+    background-color: white;
+    border-radius: 8px;
 }
 
 .Dashboard__Portfolio{
@@ -528,6 +531,7 @@ body{
 .Dashboard__portfolio--header{
     font-size: 20px;
     font-weight: 600;
+    color: white;
 }
 
 .CoinbasePerk{
