@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Coin from './Coin';
+import { RotateLoader } from 'react-spinners';
 
 
 function PricesPage() {
@@ -25,7 +26,6 @@ function PricesPage() {
         fetchCoins()
     },[])
 
-    console.log(crypto)
     let count = 0
     if(crypto){
         return (
@@ -73,7 +73,9 @@ function PricesPage() {
     }
     return (
         <>
-            <div>loading...</div>
+            <div style={{position: 'fixed', top: '50%', left: '50%'}}>
+                <RotateLoader color="rgb(21,82,240)"/>
+            </div>
         </>
     );
 }

@@ -34,9 +34,13 @@ function Navbar() {
                 <Link to={'/price'}>
                     <div className="Navbar__priceslink">Prices</div>
                 </Link>
-                {loggedIn ? <div className="Navbar__welcome">Welcome, {first_name}</div> : <div></div>}
-                {loggedIn ? <button className="Navbar__signoutbutton" onClick={signout}>Signout</button> :
-                <p className="Navbar__groupedbuttons">
+                {/* {loggedIn ? <div className="Navbar__welcome">Welcome, {first_name}</div> : <div></div>} */}
+                {loggedIn ?
+                <div className="Navbar__groupedbuttons1">
+                    <div className="Navbar__welcome">Welcome, {first_name}</div>
+                    <button className="Navbar__signoutbutton" onClick={signout}>Signout</button>
+                </div> :
+                <p className="Navbar__groupedbuttons2">
                     <button className="Navbar__signinbutton" onClick={signin}>Signin</button>
                     <button className="Navbar__signupbutton" onClick={signup}>Signup</button>
                 </p>}

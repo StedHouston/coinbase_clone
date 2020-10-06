@@ -192,106 +192,112 @@ function CoinPage() {
         dispatch(UpdateFundsAction(funds.account_balance))
         historyHook.push(`/`)
     }
-
-    return (
-        <>
-            <Navbar/>
-            <div className="CoinPageContainer1">
-                <div className="CoinPageContainer">
-                    <div className="CoinPageContainer__topheader">
-                        <div className="CoinPageContainer__topheader--1">
-                            <Link to={'/price'}>Price charts {'>'} </Link>
-                        </div>
-                        <div className="CoinPageContainer__topheader--2">
-                            <Link to={`/coinpage/${name}/${symbol}`}> {name} price</Link>
-                        </div>
-                    </div>
-                    <div className="CoinPageContainer__mainheader">
-                        <div className="CoinPageContainer__mainheader--leftside">
-                            <img className="CoinPageContainer__mainheader--image" src={coin_info.image} alt=""/>
-                            <div className="CoinPageContainer__mainheader--nameprice">
-                                {name} price
+    if(prices && times){
+        return (
+            <>
+                <Navbar/>
+                <div className="CoinPageContainer1">
+                    <div className="CoinPageContainer">
+                        <div className="CoinPageContainer__topheader">
+                            <div className="CoinPageContainer__topheader--1">
+                                <Link to={'/price'}>Price charts {'>'} </Link>
                             </div>
-                            <div className="CoinPageContainer__mainheader--symbol">
-                                ({symbol.toUpperCase()})
+                            <div className="CoinPageContainer__topheader--2">
+                                <Link to={`/coinpage/${name}/${symbol}`}> {name} price</Link>
                             </div>
                         </div>
-                    </div>
-                    { usd_24h_change && usd_24h_change < 0 ? <div className="CoinPageContainer__CurrentPrice">
-                            <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span style={{color: 'red'}}>{usd_24h_change.toFixed(2)}%</span>
-                        </div> : <div></div>}
-                    { usd_24h_change && usd_24h_change > 0 ? <div className="CoinPageContainer__CurrentPrice">
-                            <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span style={{color: 'green'}}>+{usd_24h_change.toFixed(2)}%</span>
-                        </div> : <div></div>}
-                    <div className="CoinPageContainer__graph">
-                        {prices && times ? <LineChart prices={prices} times={times}/> :
-                        <BeatLoader color="rgb(21,82,240)"/>}
-                        <div className="CoinPage__transactions">
-                            <div className="CoinPage__transactiontabs">
-                                <span className="buy_tab active" onClick={buyTab}>Buy</span>
-                                <span className="sell_tab" onClick={sellTab}>Sell</span>
+                        <div className="CoinPageContainer__mainheader">
+                            <div className="CoinPageContainer__mainheader--leftside">
+                                <img className="CoinPageContainer__mainheader--image" src={coin_info.image} alt=""/>
+                                <div className="CoinPageContainer__mainheader--nameprice">
+                                    {name} price
+                                </div>
+                                <div className="CoinPageContainer__mainheader--symbol">
+                                    ({symbol.toUpperCase()})
+                                </div>
                             </div>
-                            {toggle ? <div>
-                                <div className="CoinPage__transactions--usd">
-                                    <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
-                                    <div style={{padding: "10px"}}>
-                                        <input className="small-input" value={user_amount} onChange={calculate_cost}></input>
+                        </div>
+                        { usd_24h_change && usd_24h_change < 0 ? <div className="CoinPageContainer__CurrentPrice">
+                                <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span style={{color: 'red'}}>{usd_24h_change.toFixed(2)}%</span>
+                            </div> : <div></div>}
+                        { usd_24h_change && usd_24h_change > 0 ? <div className="CoinPageContainer__CurrentPrice">
+                                <span className="CoinPageContainer__CurrentPrice--price">${usd.toLocaleString()}</span> <span style={{color: 'green'}}>+{usd_24h_change.toFixed(2)}%</span>
+                            </div> : <div></div>}
+                        <div className="CoinPageContainer__graph">
+                            <LineChart prices={prices} times={times}/>
+                            <div className="CoinPage__transactions">
+                                <div className="CoinPage__transactiontabs">
+                                    <span className="buy_tab active" onClick={buyTab}>Buy</span>
+                                    <span className="sell_tab" onClick={sellTab}>Sell</span>
+                                </div>
+                                {toggle ? <div>
+                                    <div className="CoinPage__transactions--usd">
+                                        <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
+                                        <div style={{padding: "10px"}}>
+                                            <input className="small-input" value={user_amount} onChange={calculate_cost}></input>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="CoinPage__transactions--cost">
-                                    <span>Estimated Cost: </span>
-                                    <span>{cost.toLocaleString()}</span>
-                                </div>
-                                <div className="CoinPage__transactions--orderbutton">
-                                    <button className="button is-link" onClick={makePurchase}>Complete Order</button>
-                                </div>
-                                <div className="CoinPage__transactions--coinsavailable">
-                                    <span style={{fontWeight: '600'}}>Current funds: </span> ${account_balance}
-                                </div>
-                            {errors.map(error => <div className="error">{error}</div>)}
-                            </div> : <div>
-                                <div className="CoinPage__transactions--usd">
-                                    <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
-                                    <div style={{padding: "10px"}}>
-                                        <input className="small-input" value={user_amount} onChange={calculate_cost}></input>
+                                    <div className="CoinPage__transactions--cost">
+                                        <span>Estimated Cost: </span>
+                                        <span>{cost.toLocaleString()}</span>
                                     </div>
-                                </div>
-                                <div className="CoinPage__transactions--cost">
-                                    <span>Estimated Credit: </span>
-                                    <span>{cost.toLocaleString()}</span>
-                                </div>
-                                <div className="CoinPage__transactions--orderbutton">
-                                    <button className="button is-link" onClick={makeSell}>Complete Order</button>
-                                </div>
-                                <div className="CoinPage__transactions--coinsavailable">
-                                    <span style={{fontWeight: '600', padding:'10px'}}>{availableCrypto} {symbol.toUpperCase()} available </span>
-                                </div>
+                                    <div className="CoinPage__transactions--orderbutton">
+                                        <button className="button is-link" onClick={makePurchase}>Complete Order</button>
+                                    </div>
+                                    <div className="CoinPage__transactions--coinsavailable">
+                                        <span style={{fontWeight: '600'}}>Current funds: </span> ${account_balance}
+                                    </div>
                                 {errors.map(error => <div className="error">{error}</div>)}
-                        </div>}
-                </div>
+                                </div> : <div>
+                                    <div className="CoinPage__transactions--usd">
+                                        <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
+                                        <div style={{padding: "10px"}}>
+                                            <input className="small-input" value={user_amount} onChange={calculate_cost}></input>
+                                        </div>
+                                    </div>
+                                    <div className="CoinPage__transactions--cost">
+                                        <span>Estimated Credit: </span>
+                                        <span>{cost.toLocaleString()}</span>
+                                    </div>
+                                    <div className="CoinPage__transactions--orderbutton">
+                                        <button className="button is-link" onClick={makeSell}>Complete Order</button>
+                                    </div>
+                                    <div className="CoinPage__transactions--coinsavailable">
+                                        <span style={{fontWeight: '600', padding:'10px'}}>{availableCrypto} {symbol.toUpperCase()} available </span>
+                                    </div>
+                                    {errors.map(error => <div className="error">{error}</div>)}
+                            </div>}
                     </div>
-                    <div className="CoinPageContainer__CoinDetails">
-                        <div className="CoinPageContainer__CoinDetails--marketcap">
-                            <div>Market cap</div>
-                            ${usd_market_cap.toLocaleString()}
                         </div>
-                        <div className="CoinPageContainer__CoinDetails--volume">
-                            <div>Volume (24 hours)</div>
-                            ${usd_24h_vol.toLocaleString()}
+                        <div className="CoinPageContainer__CoinDetails">
+                            <div className="CoinPageContainer__CoinDetails--marketcap">
+                                <div>Market cap</div>
+                                ${usd_market_cap.toLocaleString()}
+                            </div>
+                            <div className="CoinPageContainer__CoinDetails--volume">
+                                <div>Volume (24 hours)</div>
+                                ${usd_24h_vol.toLocaleString()}
+                            </div>
+                            <div className="CoinPageContainer__CoinDetails--circulatingsupply">
+                                <div>Circulating supply</div>
+                                {coin_info.circulatingSupply.toLocaleString()} {symbol.toUpperCase()}
+                            </div>
                         </div>
-                        <div className="CoinPageContainer__CoinDetails--circulatingsupply">
-                            <div>Circulating supply</div>
-                            {coin_info.circulatingSupply.toLocaleString()} {symbol.toUpperCase()}
-                        </div>
-                    </div>
-                    <div className="CoinPageContainer__History__Title">Transaction History</div>
-                    {history ? <div className="CoinPageContainer__History__Data">{history.map(ele =>
-                            <Transaction key={ele.id} name={name} symbol={symbol} transaction_type={ele.transaction_type} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
-                            </div> : <div>No purchases have been made</div>}
+                        <div className="CoinPageContainer__History__Title">Transaction History</div>
+                        {history ? <div className="CoinPageContainer__History__Data">{history.map(ele =>
+                                <Transaction key={ele.id} name={name} symbol={symbol} transaction_type={ele.transaction_type} date={ele.date} usd_amount={ele.usd_amount} crypto_amount={ele.crypto_amount} price_per_coin={ele.price_per_coin}/>)}
+                                </div> : <div>No purchases have been made</div>}
 
+                    </div>
                 </div>
-            </div>
-        </>
+            </>
+        );
+    }
+    return (
+        <div style={{position: 'fixed', top: '50%', left: '50%'}}>
+            <BeatLoader color="rgb(21,82,240)"/>
+        </div>
+
     );
 }
 export default CoinPage;

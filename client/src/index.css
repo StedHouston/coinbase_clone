@@ -415,8 +415,14 @@ body{
     cursor: pointer;
 }
 
+.Navbar__groupedbuttons1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
+}
 
-.Navbar__groupedbuttons{
+.Navbar__groupedbuttons2{
     display: flex;
     justify-content: space-around;
     align-items: center;
