@@ -28,7 +28,8 @@ function Navbar() {
         <>
             <div className="Navbar">
                 <Link to={'/'}>
-                    <img className="Navbar__logo" src="/images/coinbase_logo_1.png"/>
+                    {/* <img className="Navbar__logo" src="/images/coinbase_logo_1.png"/> */}
+                    <div className="Navbar__logo">Changebase</div>
                 </Link>
                 <Link to={'/price'}>
                     <div className="Navbar__priceslink">Prices</div>

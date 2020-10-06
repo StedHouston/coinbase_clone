@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 import LineChart from '../components/LineChart';
 import Transaction from '../components/Transaction';
 import { UpdateFundsAction } from '../store/accountBalance';
+import { BeatLoader } from 'react-spinners';
 import 'bulma/css/bulma.css'
 
 
@@ -26,6 +27,7 @@ function CoinPage() {
     const [times, setTimes] = useState()
     const [coinUrl, setCoinUrl] = useState('')
     const [errors, setErrors] = useState([''])
+    const [loading, setLoading] = useState(true)
 
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
     const account_balance = useSelector(state => state.UpdateFundsReducer.account_balance)
@@ -35,14 +37,12 @@ function CoinPage() {
     let historyHook = useHistory()
     let dispatch = useDispatch()
 
-    console.log(loggedIn)
+
     useEffect(() => {
         async function fetchCoinData(){
 
-
             let results = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin_info.id}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
             let data = await results.json()
-            console.log(coin_info.id)
             let coin_data = data[coin_info.id]
 
 
@@ -80,7 +80,6 @@ function CoinPage() {
                 },
             });
             let crypto_available = await result5.json()
-            console.log(crypto_available.crypto_amount)
             setAvailableCrypto(crypto_available.crypto_amount)
             setCoinUrl(coin.image_url)
             setUsd_market_cap(coin_data.usd_market_cap)
@@ -89,6 +88,7 @@ function CoinPage() {
             setUsd(coin_data.usd.toFixed(2))
             setPrices(prices)
             setTimes(times)
+            setLoading(false)
         }
         fetchCoinData()
     },[])
@@ -225,7 +225,7 @@ function CoinPage() {
                         </div> : <div></div>}
                     <div className="CoinPageContainer__graph">
                         {prices && times ? <LineChart prices={prices} times={times}/> :
-                        <div></div>}
+                        <BeatLoader color="rgb(21,82,240)"/>}
                         <div className="CoinPage__transactions">
                             <div className="CoinPage__transactiontabs">
                                 <span className="buy_tab active" onClick={buyTab}>Buy</span>

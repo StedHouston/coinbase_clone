@@ -50,6 +50,9 @@ function Signin_page() {
     }
 
     const demoLogin = async () => {
+      setEmail('demoUser@aa.io')
+      setPassword('password')
+
       try{
         const response = await fetch(`${baseUrl}/api/users/signin`, {
           method: 'POST',
@@ -84,7 +87,7 @@ function Signin_page() {
         <>
             <Navbar/>
             <div className="SignupPage">
-                <div className="SignupPage__Title">Sign in to Coinbase</div>
+                <div className="SignupPage__Title">Sign in to Changebase</div>
                 <div className="SigninPage__Form">
                 {errors.map(error => <div className="error">{error}</div>)}
                     <div className="field">

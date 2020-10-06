@@ -375,9 +375,15 @@ body{
 }
 
 .Navbar__logo{
+    display: flex;
+    align-items: center;
+    color: rgb(21,82,240);
+    font-size: 28px;
+    font-weight: 700;
     height: 65px;
     width:  120px;
     padding-left: 10px;
+    align-self: center;
 }
 
 .Navbar__signoutbutton{
@@ -426,6 +432,7 @@ body{
 .Navbar__priceslink{
     font-size: 28px;
     font-weight: 700;
+    color: rgb(21,82,240)
 }
 
 .Transaction__Container{
