@@ -14,13 +14,10 @@ function PricesPage() {
             let results = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`)
             let data = await results.json()
             setCrypto(data)
-            console.log(data)
             let total = 0;
             for(let i = 0; i < data.length; i++){
                 total += data[i].price_change_percentage_24h;
             }
-            console.log(total)
-            console.log((total / data.length).toFixed(2))
             setMarket_percentage_change((total / data.length).toFixed(2))
         }
         fetchCoins()
@@ -37,10 +34,7 @@ function PricesPage() {
                         { market_percentage_change >= 0 ?<div className="PricesPage__SearchBar--marketheadline2">Market is up <span style={{color: 'green', fontSize: '20px',fontWeight: 'bolder'}}>{market_percentage_change}%</span></div> :
                         <div className="PricesPage__SearchBar--marketheadline2">Market is down <span style={{color: 'red', fontSize: '20px', fontWeight: '800'}}>{market_percentage_change}%</span></div>}
                     </div>
-                    <div className="field">
-                        <div className="control">
-                            <input className="input" type="text" placeholder="Search all assets..."/>
-                        </div>
+                    <div>
                     </div>
                 </div>
                 <div className="PricesPage__Results">

@@ -23,8 +23,6 @@ function Dashboard() {
             let data = await results.json()
             let coins = data.portfolio;
             let coin_list = data.coin_list;
-            console.log(coin_list)
-            console.log(data)
             let array = []
 
             for(let key in coins){
@@ -36,7 +34,6 @@ function Dashboard() {
         fetchPortfolio()
     },[])
 
-    console.log(portfolio)
     return (
         <>
             <Navbar/>

@@ -13,7 +13,6 @@ function App() {
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
   return (
     <BrowserRouter>
-        {/* <Navbar/> */}
         <Switch>
             <Route path="/signup">
                 <Signup_page/>
@@ -32,7 +31,6 @@ function App() {
             </Route>
             <Route path="/">
                 {loggedIn ? <Dashboard/> : <Homepage/>}
-
             </Route>
         </Switch>
     </BrowserRouter>

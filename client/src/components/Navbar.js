@@ -28,13 +28,11 @@ function Navbar() {
         <>
             <div className="Navbar">
                 <Link to={'/'}>
-                    {/* <img className="Navbar__logo" src="/images/coinbase_logo_1.png"/> */}
                     <div className="Navbar__logo">Changebase</div>
                 </Link>
                 <Link to={'/price'}>
                     <div className="Navbar__priceslink">Prices</div>
                 </Link>
-                {/* {loggedIn ? <div className="Navbar__welcome">Welcome, {first_name}</div> : <div></div>} */}
                 {loggedIn ?
                 <div className="Navbar__groupedbuttons1">
                     <div className="Navbar__welcome">Welcome, {first_name}</div>

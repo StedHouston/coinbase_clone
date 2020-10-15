@@ -25,9 +25,7 @@ function CoinPage() {
     const [history, setHistory] = useState([])
     const [prices, setPrices] = useState()
     const [times, setTimes] = useState()
-    const [coinUrl, setCoinUrl] = useState('')
     const [errors, setErrors] = useState([''])
-    const [loading, setLoading] = useState(true)
 
     const loggedIn = useSelector(state => state.LoggedInReducer.loggedIn)
     const account_balance = useSelector(state => state.UpdateFundsReducer.account_balance)
@@ -81,14 +79,12 @@ function CoinPage() {
             });
             let crypto_available = await result5.json()
             setAvailableCrypto(crypto_available.crypto_amount)
-            setCoinUrl(coin.image_url)
             setUsd_market_cap(coin_data.usd_market_cap)
             setUsd_24h_vol(coin_data.usd_24h_vol)
             setUsd_24h_change(coin_data.usd_24h_change)
             setUsd(coin_data.usd.toFixed(2))
             setPrices(prices)
             setTimes(times)
-            setLoading(false)
         }
         fetchCoinData()
     },[])
@@ -247,7 +243,7 @@ function CoinPage() {
                                     <div className="CoinPage__transactions--coinsavailable">
                                         <span style={{fontWeight: '600'}}>Current funds: </span> ${account_balance}
                                     </div>
-                                {errors.map(error => <div className="error">{error}</div>)}
+                                {errors.map(error => <div className="error" key={error}>{error}</div>)}
                                 </div> : <div>
                                     <div className="CoinPage__transactions--usd">
                                         <span style={{padding: "10px"}}>{symbol.toUpperCase()}</span>
@@ -265,7 +261,7 @@ function CoinPage() {
                                     <div className="CoinPage__transactions--coinsavailable">
                                         <span style={{fontWeight: '600', padding:'10px'}}>{availableCrypto} {symbol.toUpperCase()} available </span>
                                     </div>
-                                    {errors.map(error => <div className="error">{error}</div>)}
+                                    {errors.map(error => <div className="error" key={error}>{error}</div>)}
                             </div>}
                     </div>
                         </div>

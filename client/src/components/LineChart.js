@@ -33,8 +33,6 @@ const LineChart = (props) => {
           format: '{value:%H %M}'
       },
       categories: newTimes,
-      // minPadding: 0,
-      // maxPadding: 0
     },
     yAxis: {
       title: {
@@ -48,17 +46,6 @@ const LineChart = (props) => {
     chart: {
       width: 725
     },
-    // plotOptions: {
-    //   series: {
-    //     point: {
-    //       events: {
-    //         mouseOver(e){
-    //           setHoverData(e.target.category)
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
   });
 
 
